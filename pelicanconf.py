@@ -8,6 +8,10 @@ SITEURL = ''
 
 PATH = 'content'
 OUTPUT_PATH = ''
+STATIC_EXCLUDES = ['images']
+ARTICLE_EXCLUDES = ['images']
+PAGE_EXCLUDES = ['images']
+STATIC_EXCLUDE_SOURCES = False
 
 TIMEZONE = 'Asia/Chongqing'
 
@@ -24,6 +28,7 @@ ARTICLE_URL = 'posts/{date:%Y}/{slug}.html'
 ARTICLE_SAVE_AS = 'posts/{date:%Y}/{slug}.html'
 PAGE_URL = 'pages/{slug}.html'
 PAGE_SAVE_AS = 'pages/{slug}.html'
+
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
