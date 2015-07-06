@@ -7,7 +7,7 @@ SITENAME = u'Sit down, write down, light up'
 SITEURL = ''
 
 PATH = 'content'
-OUTPUT_PATH = 'says'
+OUTPUT_PATH = ''
 
 TIMEZONE = 'Asia/Chongqing'
 
@@ -20,6 +20,10 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
+ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
+PAGE_URL = 'pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
