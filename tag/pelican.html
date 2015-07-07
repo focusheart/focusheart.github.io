@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Sit down, write down, light up - pelican</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Sit down, write down, light up </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about-me.html">About Me</a></li>
+                    <li><a href="/category/development.html">Development</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/posts/2015/install-pelican-and-write.html">Install pelican and write~</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-07-07T09:34:00+08:00">
+                Published: 周二 07 七月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">Development</a>.</p>
+<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/pelican.html">pelican</a> </p>
+</footer><!-- /.post-info --><h1>Quick Start</h1>
+<p>The default recommendation of GitHub Pages is jekyll, but I prefer Python than Ruby to write something. As a result, I found pelican to write my blog on GitHub Pages. Here, <a href="http://docs.getpelican.com/en/3.6.0/quickstart.html">http://docs.getpelican.com/en/3.6.0/quickstart.html</a></p>
+<p>The installation is quite easy in pythonic way:</p>
+<div class="highlight"><pre>c:\&gt; pip install pelican markdown
+</pre></div>
+
+
+<p>The pip will automatically install other dependencies for you such as jinja2, etc. </p>
+<p>Then I can start my project, first, create an appropriately-named directory and switch to it (we call it site directory):</p>
+<div class="highlight"><pre>mkdir focusheart.github.io
+cd focusheart.github.io
+</pre></div>
+
+
+<p>Create basic files via the <code>pelican-quickstart</code> command:</p>
+<div class="highlight"><pre>pelican-quickstart
+</pre></div>
+
+
+<p>Most of the questions have default values in brackets. When finished, we can start writing the first article:</p>
+<div class="highlight"><pre>cd content
+vim hello-world.md
+</pre></div>
+
+
+<p>The basic content may like this:</p>
+<div class="highlight"><pre><span class="n">Title</span><span class="o">:</span> <span class="n">Hello</span> <span class="n">World</span>
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2015</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="o">:</span><span class="mi">20</span>
+<span class="n">Category</span><span class="o">:</span> <span class="n">Development</span>
+<span class="n">Tags</span><span class="o">:</span> <span class="n">pelican</span><span class="o">,</span> <span class="n">python</span>
+<span class="n">Slug</span><span class="o">:</span> <span class="n">hello</span><span class="o">-</span><span class="n">world</span>
+
+<span class="n">Hello</span><span class="o">,</span> <span class="n">world</span><span class="o">!</span>
+</pre></div>
+
+
+<p>The syntax follows Markdown Extensions. When done writing, generate the HTML by the following command in site  directory:</p>
+<div class="highlight"><pre>pelican content
+</pre></div>
+
+
+<p>Then we can launch a web server to see the article.</p>
+<div class="highlight"><pre>cd output
+python -m pelican.server
+</pre></div>
+
+
+<p>Preview our site by navigating to <a href="http://localhost:8000">http://localhost:8000</a> in my browser.</p>
+<h1>More Configuration</h1>
+<p>In order to work with GitHub Pages, I changed some config to make it easier to sync all sources and generated contents with GitHub. The pelican config file is hosted at <a href="https://github.com/focusheart/focusheart.github.io/blob/master/pelicanconf.py">https://github.com/focusheart/focusheart.github.io/blob/master/pelicanconf.py</a>.</p>
+<p>More then default configs, I modified and added some following:</p>
+<div class="highlight"><pre>SITEURL = &#39;&#39; # I found this works well for me
+OUTPUT_PATH = &#39;&#39; # output everything in root dir
+STATIC_EXCLUDES = [&#39;images&#39;] # seems no use
+ARTICLE_EXCLUDES = [&#39;images&#39;] # the same as above
+PAGE_EXCLUDES = [&#39;images&#39;] # the same
+STATIC_EXCLUDE_SOURCES = False # the same
+
+# I changed the default article url and save file 
+ARTICLE_URL = &#39;posts/{date:%Y}/{slug}.html&#39;
+ARTICLE_SAVE_AS = &#39;posts/{date:%Y}/{slug}.html&#39;
+PAGE_URL = &#39;pages/{slug}.html&#39;
+PAGE_SAVE_AS = &#39;pages/{slug}.html&#39;
+</pre></div>
+
+
+<p>The above config works well, but the images in <code>content/images</code> will be duplicated and sync to GitHub. Then I add <code>.gitignore</code> to ignore the generated directory <code>images</code> and other files:</p>
+<div class="highlight"><pre>/images/
+*.pyc
+</pre></div>
+
+
+<p>The detail in <a href="https://github.com/focusheart/focusheart.github.io/blob/master/.gitignore">https://github.com/focusheart/focusheart.github.io/blob/master/.gitignore</a></p>
+<p>The most of my work done, and I will try my best to update this blog~</p>                </article>
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">not xet</a></li>
+                            <li><a href="#">not yet</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
