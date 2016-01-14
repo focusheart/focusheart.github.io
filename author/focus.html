@@ -15,14 +15,48 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li><a href="/category/development.html">Development</a></li>
+                    <li><a href="/category/development.html">development</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/write-more-codes.html">Write more codes!</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/ubuntu-tricks.html">Ubuntu Tricks?</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-01-14T17:06:00+08:00">
+                Published: 周四 14 一月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info --><p>There are lots of tricks or tips when I use Linux. Most of time I use Ubuntu. Here, I want to record some experiences during my work on Ubuntu.</p>
+<h2>NO password when sudo</h2>
+<p>It's not safe for a normal user to do root's matters. As result, there is <code>sudo</code>. But in some cases, the password is not necessary. For example, using ansible. We can cancel the verification by doing this:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">pkexec</span> <span class="n">visudo</span>
+
+<span class="cp"># change the %sudo line into following:</span>
+<span class="nf">%sudo</span> <span class="n">ALL</span><span class="o">=</span><span class="nl">NOPASSWD</span><span class="p">:</span> <span class="n">ALL</span>
+</pre></div>
+
+
+<p>then exit and enjoy no password for <code>sudo xxx</code>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/write-more-codes.html" rel="bookmark"
+                           title="Permalink to Write more codes!">Write more codes!</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-11T21:40:00+08:00">
                 Published: 周一 11 一月 2016
@@ -33,12 +67,10 @@
         </address>
 <p>In <a href="/category/whatever.html">whatever</a>.</p>
 
-</footer><!-- /.post-info --><p>Quite a long time since last update. I think I should write more code, and paper! Graduate as soon as possible!</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Quite a long time since last update. I think I should write more code, and paper! Graduate as soon as possible!</p>
+                <a class="readmore" href="/posts/2016/write-more-codes.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -122,8 +154,8 @@
                         <h2>social</h2>
                         <ul>
 
-                            <li><a href="#">not xet</a></li>
-                            <li><a href="#">not yet</a></li>
+                            <li><a href="http://github.com">GitHub</a></li>
+                            <li><a href="http://jandan.net">jandan</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->
