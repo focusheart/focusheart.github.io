@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Sit down, write down, light up - Development</title>
+        <title>Sit down, write down, light up - development</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,14 +15,40 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li class="active"><a href="/category/development.html">Development</a></li>
+                    <li class="active"><a href="/category/development.html">development</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/password.html">Password!</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/the-network-is-really-bad.html">The network is really bad!</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-01-20T21:59:00+08:00">
+                Published: 周三 20 一月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info --><p>Recently, I want to have a look at development of Android App. The first thing, of cause, go to the homepage of Android. But the site couldn't be opened, as I thought, of cause. </p>
+<p>OK, there are some mirror-sites, but which is latest and/or reliable? After installed the Android Studio IDE, which took me about half a hour, it told me I have to install the SDK. but the SDK Manager can't access google's site! OK, there are also some mirror-sites. I choosed API 22 and some other packages, and began waiting.</p>
+<p>On the right now, I'm watching the process bar while writing this post, there are still a long time to go. Meanwhile, the download of android-studio-bundle (about 1.2GB ) on a VPS had already finished when I was searching for the mirror-sites. The download speed was really FAST!!!</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/password.html" rel="bookmark"
+                           title="Permalink to Password!">Password!</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-18T10:17:00+08:00">
                 Published: 周一 18 一月 2016
@@ -33,37 +59,11 @@
         </address>
 <p>In <a href="/category/development.html">Development</a>.</p>
 <p>tags: <a href="/tag/ubuntu.html">Ubuntu</a> </p>
-</footer><!-- /.post-info --><h2>When I forgot password...</h2>
-<p>Password! I have lots of machines to manage, and passwords to remember. Therefore sometimes I can not remember a password when I login to a machine. There are some simple methods to remember, for example I can write the password on a notebook. Even though that, I still forgot. As a result, I have to reset the password! On linux (Ubuntu 14.04), it's simple:</p>
-<div class="highlight"><pre>1. Reboot to GRUB and rescure, select root( drop to shell prompt)
-2. RE-mount filesystem to r/w mode: # mount -o remount,rw /
-3. Change the password: # password username
-</pre></div>
-
-
-<h2>When I'm lazy to type password</h2>
-<p>Typing <code>ssh user@hostname</code> and then password is quite normal in my daliy life. I think it may cost at least half a hour per day to type these long, complex, hard-remember password again and again. As said that lazy is good for programmer, I decide to change something! (Also because I installed Ansible to manage lots of machines) Using <code>ssh</code> without typing password! It's simple, too:</p>
-<div class="highlight"><pre>0. login to control machine and type following commands to generate a key and give it to other machines
-1. $ ssh-keygen
-2. $ ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_machine
-</pre></div>
-
-
-<p>Type the password of <code>user@remote_machine</code> last time! Then, <code>ssh user@remote_machine</code> will be simple! </p>
-<h2>NO password when sudo</h2>
-<p>I've already write this in the previous post, but some changed in this one. It's not safe for a normal user to do root's matters. As result, there is <code>sudo</code>. But in some cases, the password is not necessary. For example, using ansible. We can cancel the verification by doing this:</p>
-<div class="highlight"><pre><span class="mf">1.</span> <span class="n">change</span> <span class="n">sudo</span> <span class="n">setting</span> <span class="n">in</span> <span class="n">normal</span> <span class="n">user</span> <span class="n">or</span> <span class="nl">root</span><span class="p">:</span> <span class="err">`#</span><span class="o">/</span><span class="err">$</span> <span class="n">pkexec</span> <span class="n">visudo</span><span class="err">`</span>
-<span class="cp"># change the %sudo line into following:</span>
-<span class="nf">%sudo</span> <span class="n">ALL</span><span class="o">=</span><span class="nl">NOPASSWD</span><span class="p">:</span> <span class="n">ALL</span>
-</pre></div>
-
-
-<p>then exit and enjoy no password for <code>sudo xxx</code>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <h2>When I forgot password...</h2>
+<p>Password! I have lots of machines to manage, and passwords to remember. Therefore sometimes I can not remember a password when I login to a machine. There are some simple methods to remember, for example I can write the password on a notebook. Even though that ...</p>
+                <a class="readmore" href="/posts/2016/password.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
