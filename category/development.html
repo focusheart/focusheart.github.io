@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Sit down, write down, light up - development</title>
+        <title>Sit down, write down, light up - Development</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,14 +15,127 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li class="active"><a href="/category/development.html">development</a></li>
+                    <li class="active"><a href="/category/development.html">Development</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/the-network-is-really-bad.html">The network is really bad!</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/vncserver-finally-works-on-my-ubuntu-1404.html">VNCServer finally works on my Ubuntu 14.04</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-03-29T10:15:00+08:00">
+                Published: 周二 29 三月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">Development</a>.</p>
+
+</footer><!-- /.post-info --><p>Finally, the VNCServer works for me on my Ubuntu 14.04.
+As I experienced before in Ubuntu 12.04 and other dists, the VNCServer is a good choice to control computer remotely. However, it's changed since I installed Ubuntu 14.04. I can NOT get the "Desktop" when I use the same configurations. After searching, I found the solution!</p>
+<p>Generally, install vnc4server first:</p>
+<div class="highlight"><pre># apt-get install vnc4server
+</pre></div>
+
+
+<p>Install more:</p>
+<div class="highlight"><pre># apt-get install gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+</pre></div>
+
+
+<p>First start up, I prefer use <code>:1</code>:</p>
+<div class="highlight"><pre># vnc4server :1
+</pre></div>
+
+
+<p>and then kill it:</p>
+<div class="highlight"><pre># vnc4server -kill :1
+</pre></div>
+
+
+<p>update the xstartup:</p>
+<div class="highlight"><pre># vim ~/.vnc/xstartup
+</pre></div>
+
+
+<p>replace the content with the following:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nb">export </span><span class="nv">XKL_XMODMAP_DISABLE</span><span class="o">=</span>1
+<span class="nb">unset </span>SESSION_MANAGER
+<span class="nb">unset </span>DBUS_SESSION_BUS_ADDRESS
+
+<span class="o">[</span> -x /etc/vnc/xstartup <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">exec</span> /etc/vnc/xstartup
+<span class="o">[</span> -r <span class="nv">$HOME</span>/.Xresources <span class="o">]</span> <span class="o">&amp;&amp;</span> xrdb <span class="nv">$HOME</span>/.Xresources
+xsetroot -solid grey
+vncconfig -iconic <span class="p">&amp;</span>
+
+gnome-panel <span class="p">&amp;</span>
+gnome-settings-daemon <span class="p">&amp;</span>
+metacity <span class="p">&amp;</span>
+nautilus <span class="p">&amp;</span>
+gnome-terminal <span class="p">&amp;</span>
+</pre></div>
+</td></tr></table>
+
+<p>then, restart vnc4server:</p>
+<div class="highlight"><pre># vnc4server -geometry 1280x800 :1
+</pre></div>
+
+
+<p>use vncviewer connect to this server ip, <code>xxx.xxx.xxx.xxx:1</code>!</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/ffmpeg-is-amazing-a-simple-tip-for-html5-use-case.html" rel="bookmark"
+                           title="Permalink to FFmpeg is amazing! A simple tip for HTML5 use case">FFmpeg is amazing! A simple tip for HTML5 use case</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-02-29T21:40:00+08:00">
+                Published: 周一 29 二月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Video/Audio processing is not easy as far as I know, and the FFmpeg is like the Swiss Knife in my thought. In this case, I've some FLV files stored in Hadoop. I want to make it playable on web page without Flash plugins. The solution is quite simple ...</p>
+                <a class="readmore" href="/posts/2016/ffmpeg-is-amazing-a-simple-tip-for-html5-use-case.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/the-network-is-really-bad.html" rel="bookmark"
+                           title="Permalink to The network is really bad!">The network is really bad!</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-20T21:59:00+08:00">
                 Published: 周三 20 一月 2016
@@ -33,14 +146,11 @@
         </address>
 <p>In <a href="/category/development.html">development</a>.</p>
 
-</footer><!-- /.post-info --><p>Recently, I want to have a look at development of Android App. The first thing, of cause, go to the homepage of Android. But the site couldn't be opened, as I thought, of cause. </p>
-<p>OK, there are some mirror-sites, but which is latest and/or reliable? After installed the Android Studio IDE, which took me about half a hour, it told me I have to install the SDK. but the SDK Manager can't access google's site! OK, there are also some mirror-sites. I choosed API 22 and some other packages, and began waiting.</p>
-<p>On the right now, I'm watching the process bar while writing this post, there are still a long time to go. Meanwhile, the download of android-studio-bundle (about 1.2GB ) on a VPS had already finished when I was searching for the mirror-sites. The download speed was really FAST!!!</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Recently, I want to have a look at development of Android App. The first thing, of cause, go to the homepage of Android. But the site couldn't be opened, as I thought, of cause. </p>
+<p>OK, there are some mirror-sites, but which is latest and/or reliable? After installed the ...</p>
+                <a class="readmore" href="/posts/2016/the-network-is-really-bad.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>

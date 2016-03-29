@@ -1,4 +1,4 @@
-Title: Write more codes!
+Title: VNCServer finally works on my Ubuntu 14.04
 Date: 2016-03-29 10:15
 Category: Development
 
