@@ -15,17 +15,136 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li><a href="/category/development.html">Development</a></li>
+                    <li><a href="/category/development.html">development</a></li>
+                    <li><a href="/category/development-deep-learning.html">development, deep-learning</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/vncserver-finally-works-on-my-ubuntu-1404.html">VNCServer finally works on my Ubuntu 14.04</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/reverse-proxy-by-apache.html">Reverse Proxy by Apache</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-04-27T17:27:00+08:00">
+                Published: Wed 27 April 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info --><p>I use Apache to proxy service located in private network.
+But it's not easy to map all services which listened to different ports.
+If a service use absolute path in it's web page, it is more diffcult.</p>
+<p>Luckily, I found a simple solution by a modle called proxy_html!
+It's simple on Ubuntu Server:</p>
+<p>First, install this module:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install libapache2-mod-proxy-html
+</pre></div>
+
+
+<p>Second, enable this module and config in my config:</p>
+<div class="highlight"><pre><span class="nv">$ </span>vim /etc/apache/sites-enabled/000-defaults
+</pre></div>
+
+
+<p>Add the following in <VirtualHost> tag:</p>
+<div class="highlight"><pre>ProxyHTMLExtended On
+ProxyPass /nn/ http://zstorage01:50070/
+<span class="nt">&lt;Location</span> <span class="err">/nn</span><span class="nt">/&gt;</span>
+    ProxyPassReverse /
+    ProxyHTMLURLMap http://zstorage01:50070/ /nn/
+    SetOutputFilter proxy-html
+    ProxyHTMLURLMap / /nn/
+<span class="nt">&lt;/Location&gt;</span>
+
+ProxyPass /dn/ http://zstorage01:50075/
+<span class="nt">&lt;Location</span> <span class="err">/dn</span><span class="nt">/&gt;</span>
+    ProxyPassReverse /
+    ProxyHTMLURLMap http://zstorage01:50075/ /dn/
+    SetOutputFilter proxy-html
+    ProxyHTMLURLMap / /dn/
+<span class="nt">&lt;/Location&gt;</span>
+</pre></div>
+
+
+<p>Finally, reload apache:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo service apache2 reload
+</pre></div>
+
+
+<p>In the configs list above, I create two reverse proxies to map Hadoop's page.
+The <code>/nn/</code> is NameNode, and we can access the <code>dfshealth.jsp</code> from proxy server's port 80, by <code>http://proxyserver/nn/.
+The</code>/dn/<code>is DataNode, and also can be used to access DataNode's</code>browseDirectory.jsp`.</p>
+<p>Then I can access the page of other ports from port 80 and use a relative path.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/access-mine-home-machine-from-outside-by-ssh-tunnel.html" rel="bookmark"
+                           title="Permalink to Access mine home machine from outside by SSH tunnel!">Access mine home machine from outside by SSH tunnel!</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-04-16T10:25:00+08:00">
+                Published: Sat 16 April 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Global IP address is limited resource in my environment.
+I have some machine in my office and home which has no global IP.
+If I want to access these inner machines from outside, it is quite diffcult.
+Now, thanks to lots of programmers, I known how to achieve that~
+Let ...</p>
+                <a class="readmore" href="/posts/2016/access-mine-home-machine-from-outside-by-ssh-tunnel.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/you-should-have-a-local-apt-mirror.html" rel="bookmark"
+                           title="Permalink to You should have a local APT-mirror~">You should have a local APT-mirror~</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-03-30T10:25:00+08:00">
+                Published: Wed 30 March 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development-deep-learning.html">development, deep-learning</a>.</p>
+
+</footer><!-- /.post-info -->                <p>The network condition in our lab is very good, in general. 
+However, the <code>apt-get</code> update is not that well.
+Download speed often fluctuates in the daytime, maybe due to great amount of users.
+The speed in late night is quite good, but I can't install softwares at that time ...</p>
+                <a class="readmore" href="/posts/2016/you-should-have-a-local-apt-mirror.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/vncserver-finally-works-on-my-ubuntu-1404.html" rel="bookmark"
+                           title="Permalink to VNCServer finally works on my Ubuntu 14.04">VNCServer finally works on my Ubuntu 14.04</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-03-29T10:15:00+08:00">
-                Published: 周二 29 三月 2016
+                Published: Tue 29 March 2016
         </abbr>
 
         <address class="vcard author">
@@ -33,79 +152,11 @@
         </address>
 <p>In <a href="/category/development.html">Development</a>.</p>
 
-</footer><!-- /.post-info --><p>Finally, the VNCServer works for me on my Ubuntu 14.04.
-As I experienced before in Ubuntu 12.04 and other dists, the VNCServer is a good choice to control computer remotely. However, it's changed since I installed Ubuntu 14.04. I can NOT get the "Desktop" when I use the same configurations. After searching, I found the solution!</p>
-<p>Generally, install vnc4server first:</p>
-<div class="highlight"><pre># apt-get install vnc4server
-</pre></div>
-
-
-<p>Install more:</p>
-<div class="highlight"><pre># apt-get install gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
-</pre></div>
-
-
-<p>First start up, I prefer use <code>:1</code>:</p>
-<div class="highlight"><pre># vnc4server :1
-</pre></div>
-
-
-<p>and then kill it:</p>
-<div class="highlight"><pre># vnc4server -kill :1
-</pre></div>
-
-
-<p>update the xstartup:</p>
-<div class="highlight"><pre># vim ~/.vnc/xstartup
-</pre></div>
-
-
-<p>replace the content with the following:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
-
-<span class="nb">export </span><span class="nv">XKL_XMODMAP_DISABLE</span><span class="o">=</span>1
-<span class="nb">unset </span>SESSION_MANAGER
-<span class="nb">unset </span>DBUS_SESSION_BUS_ADDRESS
-
-<span class="o">[</span> -x /etc/vnc/xstartup <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">exec</span> /etc/vnc/xstartup
-<span class="o">[</span> -r <span class="nv">$HOME</span>/.Xresources <span class="o">]</span> <span class="o">&amp;&amp;</span> xrdb <span class="nv">$HOME</span>/.Xresources
-xsetroot -solid grey
-vncconfig -iconic <span class="p">&amp;</span>
-
-gnome-panel <span class="p">&amp;</span>
-gnome-settings-daemon <span class="p">&amp;</span>
-metacity <span class="p">&amp;</span>
-nautilus <span class="p">&amp;</span>
-gnome-terminal <span class="p">&amp;</span>
-</pre></div>
-</td></tr></table>
-
-<p>then, restart vnc4server:</p>
-<div class="highlight"><pre># vnc4server -geometry 1280x800 :1
-</pre></div>
-
-
-<p>use vncviewer connect to this server ip, <code>xxx.xxx.xxx.xxx:1</code>!</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Finally, the VNCServer works for me on my Ubuntu 14.04.
+As I experienced before in Ubuntu 12.04 and other dists, the VNCServer is a good choice to control computer remotely. However, it's changed since I installed Ubuntu 14.04. I can NOT get the "Desktop" when I ...</p>
+                <a class="readmore" href="/posts/2016/vncserver-finally-works-on-my-ubuntu-1404.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -116,7 +167,7 @@ gnome-terminal <span class="p">&amp;</span>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-02-29T21:40:00+08:00">
-                Published: 周一 29 二月 2016
+                Published: Mon 29 February 2016
         </abbr>
 
         <address class="vcard author">
@@ -138,7 +189,7 @@ gnome-terminal <span class="p">&amp;</span>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-20T21:59:00+08:00">
-                Published: 周三 20 一月 2016
+                Published: Wed 20 January 2016
         </abbr>
 
         <address class="vcard author">
@@ -161,7 +212,7 @@ gnome-terminal <span class="p">&amp;</span>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-18T10:17:00+08:00">
-                Published: 周一 18 一月 2016
+                Published: Mon 18 January 2016
         </abbr>
 
         <address class="vcard author">
@@ -184,7 +235,7 @@ gnome-terminal <span class="p">&amp;</span>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-14T17:06:00+08:00">
-                Published: 周四 14 一月 2016
+                Published: Thu 14 January 2016
         </abbr>
 
         <address class="vcard author">
@@ -208,7 +259,7 @@ gnome-terminal <span class="p">&amp;</span>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-11T21:40:00+08:00">
-                Published: 周一 11 一月 2016
+                Published: Mon 11 January 2016
         </abbr>
 
         <address class="vcard author">
@@ -230,7 +281,7 @@ gnome-terminal <span class="p">&amp;</span>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-07-13T20:34:00+08:00">
-                Published: 周一 13 七月 2015
+                Published: Mon 13 July 2015
         </abbr>
 
         <address class="vcard author">
@@ -242,53 +293,11 @@ gnome-terminal <span class="p">&amp;</span>
                 <a class="readmore" href="/posts/2015/in-memory-of-satoru-iwata.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2015/install-pelican-and-write.html" rel="bookmark"
-                           title="Permalink to Install pelican and write~">Install pelican and write~</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-07-07T09:34:00+08:00">
-                Published: 周二 07 七月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/development.html">Development</a>.</p>
-<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/pelican.html">pelican</a> </p>
-</footer><!-- /.post-info -->                <h1>Quick Start</h1>
-<p>The default recommendation of GitHub Pages is jekyll, but I prefer Python than Ruby to write something. As a result, I found pelican to write my blog on GitHub Pages. Here, <a href="http://docs.getpelican.com/en/3.6.0/quickstart.html">http://docs.getpelican.com/en/3.6.0/quickstart.html</a></p>
-<p>The installation is quite easy in pythonic ...</p>
-                <a class="readmore" href="/posts/2015/install-pelican-and-write.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2015/my-first-article.html" rel="bookmark"
-                           title="Permalink to My First Article">My First Article</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-07-06T20:06:00+08:00">
-                Published: 周一 06 七月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/whatever.html">whatever</a>.</p>
-
-</footer><!-- /.post-info -->                <p>There are many things can hardly be changed in one's life, and the older the more. When found the other one, things go more complex than imagination. Since then, I begin to miss the single days.</p>
-                <a class="readmore" href="/posts/2015/my-first-article.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
+<p class="paginator">
+    Page 1 / 2
+        <a href="/author/focus2.html">&raquo;</a>
+</p>
                 </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">

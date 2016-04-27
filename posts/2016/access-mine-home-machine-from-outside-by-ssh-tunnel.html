@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Access mine home machine from outside by SSH tunnel!</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Sit down, write down, light up </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about-me.html">About Me</a></li>
+                    <li class="active"><a href="/category/development.html">development</a></li>
+                    <li><a href="/category/development-deep-learning.html">development, deep-learning</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2016/access-mine-home-machine-from-outside-by-ssh-tunnel.html" rel="bookmark"
+           title="Permalink to Access mine home machine from outside by SSH tunnel!">Access mine home machine from outside by SSH tunnel!</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-04-16T10:25:00+08:00">
+                Published: Sat 16 April 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info -->      <p>Global IP address is limited resource in my environment.
+I have some machine in my office and home which has no global IP.
+If I want to access these inner machines from outside, it is quite diffcult.
+Now, thanks to lots of programmers, I known how to achieve that~
+Let's explain the process:</p>
+<p>It's quite simple! There are one thing you must prepare: a machine with global IP anyway.
+You can buy a VPS on Amazon EC2 or DigitalOcean or Alibaba, or any other provider.
+Assume this machine is G and its IP is gg.gg.gg.gg.</p>
+<p>My inner machine in workplace is W, which installed Ubuntu OS.
+My notebook is N, I will take it when outside. </p>
+<p>Let's begin config!</p>
+<p>First, generate a public key on <strong>W</strong>, you can simplely just press Enter and Enter again to generate a RSA key pair:</p>
+<div class="highlight"><pre><span class="nv">$ </span>ssh-keygen
+</pre></div>
+
+
+<p>Second, put this keyfile <code>id_rsa.pub</code> to <strong>G</strong>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>scp ~/.ssh/id_rsa.pub user@gg.gg.gg.gg:/home/user/w_key.pub
+</pre></div>
+
+
+<p>Then, login to <strong>G</strong> and import this public key:</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat ~/w_key.pub &gt;&gt; ~/.ssh/authorized_keys
+</pre></div>
+
+
+<p>Then, your machine <strong>W</strong> can login into <strong>G</strong> without typing password, it is important for the following steps.</p>
+<p>Next, we create a piece of scripts to create ssh reverse tunnel:</p>
+<div class="highlight"><pre><span class="nv">$ </span>vim keep_ssh_tunnel.sh
+
+<span class="c">#!/bin/sh</span>
+<span class="nv">RET</span><span class="o">=</span><span class="sb">`</span>ps ax <span class="p">|</span> grep <span class="s2">&quot;10000:localhost:22&quot;</span> <span class="p">|</span> grep -v <span class="s2">&quot;grep&quot;</span><span class="sb">`</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$RET</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;The recent SSH failure occured at `date`&quot;</span> &gt;&gt; ~/ssh_tunnel.log
+    <span class="nb">echo</span> <span class="s2">&quot;Restart reverse SSH at `date`!&quot;</span>
+    ssh -f -R 10000:localhost:22 user@gg.gg.gg.gg <span class="s2">&quot;vmstat 30&quot;</span>
+<span class="k">fi</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Let's explain the above script. 
+<code>RET</code> is to check whether the ssh process is running.
+If ssh is running, <code>RET</code> must be a non-blank string, otherwise it is blank.
+If <code>RET</code> is blank, we start a new ssh process, creating reverse tunnel and execute a command <code>vmstat</code> as frequency of one time per 30 seconds. This tunnel bind port 10000 of <strong>G</strong> to port 22 of <strong>W</strong>.</p>
+<p>Now, we make a crontab plan to check every 3 minutes to execute the shell script.</p>
+<div class="highlight"><pre><span class="nv">$ </span>crontab -e
+*/3 * * * * /path_to_script/keep_ssh_tunnel.sh
+</pre></div>
+
+
+<p>That's all preparation work. Now, you can access <strong>W</strong> from <strong>N</strong>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>ssh user@gg.gg.gg.gg
+</pre></div>
+
+
+<p>On <strong>G</strong>, execute:</p>
+<div class="highlight"><pre><span class="nv">$ </span>ssh user_of_w@localhost -p 10000
+</pre></div>
+
+
+<p>Done! Then if I want to access <strong>W</strong>, it is simple, just do the last two lines.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com">GitHub</a></li>
+                            <li><a href="http://jandan.net">jandan</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

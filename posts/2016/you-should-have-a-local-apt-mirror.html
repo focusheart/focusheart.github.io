@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>You should have a local APT-mirror~</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Sit down, write down, light up </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about-me.html">About Me</a></li>
+                    <li><a href="/category/development.html">development</a></li>
+                    <li class="active"><a href="/category/development-deep-learning.html">development, deep-learning</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2016/you-should-have-a-local-apt-mirror.html" rel="bookmark"
+           title="Permalink to You should have a local APT-mirror~">You should have a local APT-mirror~</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-03-30T10:25:00+08:00">
+                Published: Wed 30 March 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development-deep-learning.html">development, deep-learning</a>.</p>
+
+</footer><!-- /.post-info -->      <p>The network condition in our lab is very good, in general. 
+However, the <code>apt-get</code> update is not that well.
+Download speed often fluctuates in the daytime, maybe due to great amount of users.
+The speed in late night is quite good, but I can't install softwares at that time.
+Then, I found that I can install a mirror site of apt sources!
+It will be very fast!</p>
+<p>It's quite simple to achieve that~</p>
+<p>First of all, you must install apt-mirror on your local machine as apt source.</p>
+<div class="highlight"><pre># apt-get install apt-mirror
+</pre></div>
+
+
+<p>Then update the config of apt-mirror to link to a mirror sites</p>
+<div class="highlight"><pre><span class="c"># vim /etc/apt/mirror.list</span>
+
+<span class="err">set</span> <span class="err">base_path</span> <span class="err">/apt</span>     <span class="c"># I mounted a disk on this path as storage</span>
+<span class="err">set</span> <span class="err">defaultarch</span> <span class="err">amd64</span>  <span class="c"># Only sync 64bit data, i386 is nouse for me</span>
+<span class="err">set</span> <span class="err">nthreads</span> <span class="err">20</span>        <span class="c"># Set the threads number to speed up download</span>
+<span class="err">set</span> <span class="err">_tilde</span> <span class="err">0</span>           <span class="c"># I forget what is this config</span>
+
+<span class="c"># The mirror urls, I use tsinghua&#39;s apt mirror    </span>
+<span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span> <span class="kp">trusty</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span> <span class="kp">trusty-backports</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span> <span class="kp">trusty-proposed</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span> <span class="kp">trusty-security</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span> <span class="kp">trusty-updates</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+</pre></div>
+
+
+<p>Then sync! This process will take much long time to finish, you can go to sleep</p>
+<div class="highlight"><pre># apt-mirror
+</pre></div>
+
+
+<p>Some posts from blogs say that you can config <code>crontab</code> to sync with apt server automatically.
+I didn't config that because this is enough for me.
+I can update the mirror when I want to.</p>
+<p>Then update my Apache's config:</p>
+<div class="highlight"><pre># vim /etc/apache2/mods-available/alias.conf
+</pre></div>
+
+
+<p>Add the following configs in <code>&lt;IfModule alias_module&gt;</code></p>
+<div class="highlight"><pre>Alias /ubuntu /apt/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu
+
+<span class="nt">&lt;Directory</span> <span class="err">&quot;/apt/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu&quot;</span><span class="nt">&gt;</span>
+    Options Indexes FollowSymlinks
+    AllowOverride None
+    Require all granted
+<span class="nt">&lt;/Directory&gt;</span>
+</pre></div>
+
+
+<p>Restart or reload config of apache2</p>
+<div class="highlight"><pre># /etc/init.d/apache2 reload
+</pre></div>
+
+
+<p>Then, the SERVER side is done! Left is config client machine.</p>
+<p>Update the <code>sources.list</code> on client machine:</p>
+<div class="highlight"><pre># vim /etc/apt/sources.list
+</pre></div>
+
+
+<p>Replace the origin content with the following. 
+Attention please replace <code>localhost</code> with your apt server IP or domain name</p>
+<div class="highlight"><pre><span class="k">deb</span> <span class="sx">[arch=amd64]</span> <span class="kp">http://localhost/ubuntu/</span> <span class="kp">trusty</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="sx">[arch=amd64]</span> <span class="kp">http://localhost/ubuntu/</span> <span class="kp">trusty-backports</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="sx">[arch=amd64]</span> <span class="kp">http://localhost/ubuntu/</span> <span class="kp">trusty-proposed</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="sx">[arch=amd64]</span> <span class="kp">http://localhost/ubuntu/</span> <span class="kp">trusty-security</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+<span class="k">deb</span> <span class="sx">[arch=amd64]</span> <span class="kp">http://localhost/ubuntu/</span> <span class="kp">trusty-updates</span> <span class="kp">main</span> <span class="kp">multiverse</span> <span class="kp">restricted</span> <span class="kp">universe</span>
+</pre></div>
+
+
+<p>Then Update apt</p>
+<div class="highlight"><pre># apt-get update
+</pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com">GitHub</a></li>
+                            <li><a href="http://jandan.net">jandan</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

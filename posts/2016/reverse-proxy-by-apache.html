@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Ubuntu Tricks?</title>
+        <title>Reverse Proxy by Apache</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -24,14 +24,14 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="/posts/2016/ubuntu-tricks.html" rel="bookmark"
-           title="Permalink to Ubuntu Tricks?">Ubuntu Tricks?</a></h1>
+        <a href="/posts/2016/reverse-proxy-by-apache.html" rel="bookmark"
+           title="Permalink to Reverse Proxy by Apache">Reverse Proxy by Apache</a></h1>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2016-01-14T17:06:00+08:00">
-                Published: Thu 14 January 2016
+        <abbr class="published" title="2016-04-27T17:27:00+08:00">
+                Published: Wed 27 April 2016
         </abbr>
 
         <address class="vcard author">
@@ -39,17 +39,50 @@
         </address>
 <p>In <a href="/category/development.html">development</a>.</p>
 
-</footer><!-- /.post-info -->      <p>There are lots of tricks or tips when I use Linux. Most of time I use Ubuntu. Here, I want to record some experiences during my work on Ubuntu.</p>
-<h2>NO password when sudo</h2>
-<p>It's not safe for a normal user to do root's matters. As result, there is <code>sudo</code>. But in some cases, the password is not necessary. For example, using ansible. We can cancel the verification by doing this:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">pkexec</span> <span class="n">visudo</span>
-
-<span class="cp"># change the %sudo line into following:</span>
-<span class="nf">%sudo</span> <span class="n">ALL</span><span class="o">=</span><span class="nl">NOPASSWD</span><span class="p">:</span> <span class="n">ALL</span>
+</footer><!-- /.post-info -->      <p>I use Apache to proxy service located in private network.
+But it's not easy to map all services which listened to different ports.
+If a service use absolute path in it's web page, it is more diffcult.</p>
+<p>Luckily, I found a simple solution by a modle called proxy_html!
+It's simple on Ubuntu Server:</p>
+<p>First, install this module:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install libapache2-mod-proxy-html
 </pre></div>
 
 
-<p>then exit and enjoy no password for <code>sudo xxx</code>.</p>
+<p>Second, enable this module and config in my config:</p>
+<div class="highlight"><pre><span class="nv">$ </span>vim /etc/apache/sites-enabled/000-defaults
+</pre></div>
+
+
+<p>Add the following in <VirtualHost> tag:</p>
+<div class="highlight"><pre>ProxyHTMLExtended On
+ProxyPass /nn/ http://zstorage01:50070/
+<span class="nt">&lt;Location</span> <span class="err">/nn</span><span class="nt">/&gt;</span>
+    ProxyPassReverse /
+    ProxyHTMLURLMap http://zstorage01:50070/ /nn/
+    SetOutputFilter proxy-html
+    ProxyHTMLURLMap / /nn/
+<span class="nt">&lt;/Location&gt;</span>
+
+ProxyPass /dn/ http://zstorage01:50075/
+<span class="nt">&lt;Location</span> <span class="err">/dn</span><span class="nt">/&gt;</span>
+    ProxyPassReverse /
+    ProxyHTMLURLMap http://zstorage01:50075/ /dn/
+    SetOutputFilter proxy-html
+    ProxyHTMLURLMap / /dn/
+<span class="nt">&lt;/Location&gt;</span>
+</pre></div>
+
+
+<p>Finally, reload apache:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo service apache2 reload
+</pre></div>
+
+
+<p>In the configs list above, I create two reverse proxies to map Hadoop's page.
+The <code>/nn/</code> is NameNode, and we can access the <code>dfshealth.jsp</code> from proxy server's port 80, by <code>http://proxyserver/nn/.
+The</code>/dn/<code>is DataNode, and also can be used to access DataNode's</code>browseDirectory.jsp`.</p>
+<p>Then I can access the page of other ports from port 80 and use a relative path.</p>
     </div><!-- /.entry-content -->
 
   </article>
