@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Ubuntu Tricks?</title>
+        <title>Simple Fizz Buzz Quizz</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,8 +15,8 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li class="active"><a href="/category/development.html">development</a></li>
-                    <li><a href="/category/online-judge.html">Online-Judge</a></li>
+                    <li><a href="/category/development.html">development</a></li>
+                    <li class="active"><a href="/category/online-judge.html">Online-Judge</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
@@ -24,32 +24,42 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="/posts/2016/ubuntu-tricks.html" rel="bookmark"
-           title="Permalink to Ubuntu Tricks?">Ubuntu Tricks?</a></h1>
+        <a href="/posts/2016/simple-fizz-buzz-quizz.html" rel="bookmark"
+           title="Permalink to Simple Fizz Buzz Quizz">Simple Fizz Buzz Quizz</a></h1>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2016-01-14T17:06:00+08:00">
-                Published: 周四 14 一月 2016
+        <abbr class="published" title="2016-10-08T11:43:00+08:00">
+                Published: 周六 08 十月 2016
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/focus.html">Focus</a>
         </address>
-<p>In <a href="/category/development.html">development</a>.</p>
+<p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
 
-</footer><!-- /.post-info -->      <p>There are lots of tricks or tips when I use Linux. Most of time I use Ubuntu. Here, I want to record some experiences during my work on Ubuntu.</p>
-<h2>NO password when sudo</h2>
-<p>It's not safe for a normal user to do root's matters. As result, there is <code>sudo</code>. But in some cases, the password is not necessary. For example, using ansible. We can cancel the verification by doing this:</p>
-<div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">pkexec</span> <span class="n">visudo</span>
-
-<span class="cp"># change the %sudo line into following:</span>
-<span class="nf">%sudo</span> <span class="n">ALL</span><span class="o">=</span><span class="nl">NOPASSWD</span><span class="p">:</span> <span class="n">ALL</span>
+</footer><!-- /.post-info -->      <p>The problem is <a href="https://leetcode.com/problems/fizz-buzz/">Fizz Buzz</a>. 
+It's quite simple!</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">def</span> <span class="n">fizzBuzz</span>(<span class="k">self</span>, <span class="n">n</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type n: int</span>
+<span class="s">        :rtype: List[str]</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> = []
+        <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="n">range</span>(<span class="mi">1</span>, <span class="n">n</span><span class="o">+</span><span class="mi">1</span>):
+            <span class="k">if</span> <span class="n">i</span> % <span class="mi">3</span> == <span class="mi">0</span>:
+                <span class="k">if</span> <span class="n">i</span> % <span class="mi">5</span> == <span class="mi">0</span>:
+                    <span class="n">ret</span>.<span class="n">append</span>(<span class="s">&#39;FizzBuzz&#39;</span>)
+                <span class="n">else:</span>
+                    <span class="n">ret</span>.<span class="n">append</span>(<span class="s">&#39;Fizz&#39;</span>)
+            <span class="n">elif</span> <span class="n">i</span> % <span class="mi">5</span> == <span class="mi">0</span>:
+                <span class="n">ret</span>.<span class="n">append</span>(<span class="s">&#39;Buzz&#39;</span>)
+            <span class="n">else:</span>
+                <span class="n">ret</span>.<span class="n">append</span>(<span class="s">&#39;%s&#39;</span> % <span class="n">i</span>)
+        <span class="k">return</span> <span class="n">ret</span>
 </pre></div>
-
-
-<p>then exit and enjoy no password for <code>sudo xxx</code>.</p>
     </div><!-- /.entry-content -->
 
   </article>
