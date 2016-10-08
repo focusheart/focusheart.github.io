@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Sit down, write down, light up</title>
+        <title>Path the Linux kenerl and compile your own module!</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,14 +15,46 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li><a href="/category/development.html">development</a></li>
+                    <li class="active"><a href="/category/development.html">development</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<ul>
-    <li><a href="/category/development.html">development</a></li>
-    <li><a href="/category/whatever.html">whatever</a></li>
-</ul>
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2016/path-the-linux-kenerl-and-compile-your-own-module.html" rel="bookmark"
+           title="Permalink to Path the Linux kenerl and compile your own module!">Path the Linux kenerl and compile your own module!</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-07-05T14:41:00+08:00">
+                Published: 周二 05 七月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info -->      <p>First of all, you should install some neccesory tools to build source</p>
+<p>yum install rpm-build redhat-rpm-config unifdef</p>
+<p>wget </p>
+<p>rpi -i </p>
+<p>rpmbuild -bp --target=<code>uname -m</code> kernel.spec 2&gt; err.log | tee out.log</p>
+<p>you will get an err.log and an out.log, have a look in the err.log.
+some dependencies must be install before going on</p>
+<p>cat err.log</p>
+<p>yum install patchutils xmoto asciidoc elfutils-libelf-devel elfutils-devel binutils-devel newt-devel audit-libs-devel bison flex hmaccalc</p>
+<p>Some references:
+https://linuxmoz.com/centos-kernel-source-install/
+http://www.owlriver.com/tips/non-root/
+https://wiki.centos.org/zh/HowTos/BuildingKernelModules</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

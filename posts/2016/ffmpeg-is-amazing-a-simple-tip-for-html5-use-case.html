@@ -16,7 +16,6 @@
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
                     <li class="active"><a href="/category/development.html">development</a></li>
-                    <li><a href="/category/development-deep-learning.html">development, deep-learning</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
@@ -31,7 +30,7 @@
     <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-02-29T21:40:00+08:00">
-                Published: Mon 29 February 2016
+                Published: 周一 29 二月 2016
         </abbr>
 
         <address class="vcard author">
@@ -40,7 +39,7 @@
 <p>In <a href="/category/development.html">development</a>.</p>
 
 </footer><!-- /.post-info -->      <p>Video/Audio processing is not easy as far as I know, and the FFmpeg is like the Swiss Knife in my thought. In this case, I've some FLV files stored in Hadoop. I want to make it playable on web page without Flash plugins. The solution is quite simple, using <video> tag in HTML5. The <video> is supported differently in various browser, and I want to support Chrome basicly. So, H.264 encoded mp4 format is the only choice. I've used some simple commands and got mp4 files which were playable when served by Apache using the following code:</p>
-<div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 <span class="nt">&lt;h1&gt;</span>Apache Demo<span class="nt">&lt;/h1&gt;</span>
@@ -51,12 +50,12 @@
 
 
 <p>I've an Apache running on 192.168.1.26, and the above codes work well. However, when I placed the mp4 file on Hadoop and accessed by httpfs, it's not playable and halted when downloaded whole mp4 file. The code is only different in <code>src</code> prop:</p>
-<div class="highlight"><pre>http://192.168.1.111:50070/webhdfs/v1/test/mp4/test_yi02.mp4?op=OPEN
+<div class="highlight"><pre><span></span>http://192.168.1.111:50070/webhdfs/v1/test/mp4/test_yi02.mp4?op=OPEN
 </pre></div>
 
 
 <p>This URL is accessable through browser. I think there must be something wrong in the mp4 file header or other config. After bing and bing some keywords, I found a solution: add a parameter:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ffmpeg -i input.flv -ar <span class="m">22050</span> -movflags faststart output.mp4
+<div class="highlight"><pre><span></span>$ ffmpeg -i input.flv -ar <span class="m">22050</span> -movflags faststart output.mp4
 </pre></div>
 
 

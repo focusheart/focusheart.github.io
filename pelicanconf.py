@@ -6,8 +6,8 @@ AUTHOR = u'Focus'
 SITENAME = u'Sit down, write down, light up'
 SITEURL = ''
 
-PATH = 'content'
-OUTPUT_PATH = ''
+PATH = './content/'
+OUTPUT_PATH = './'
 STATIC_EXCLUDES = ['images']
 ARTICLE_EXCLUDES = ['images']
 PAGE_EXCLUDES = ['images']

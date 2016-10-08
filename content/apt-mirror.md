@@ -1,6 +1,7 @@
 Title: You should have a local APT-mirror~
 Date: 2016-03-30 10:25
-Category: development, deep-learning
+Category: development
+tags: deep-learning
 
 The network condition in our lab is very good, in general. 
 However, the `apt-get` update is not that well.
