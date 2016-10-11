@@ -177,6 +177,40 @@ which are similar to VIM. I prefer this!</p>
 
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/posts/2016/125-valid-palindrome.html" rel="bookmark"
+                           title="Permalink to 125. Valid Palindrome">125. Valid Palindrome</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-08T11:43:00+08:00">
+                Published: 周六 08 十月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
+
+</footer><!-- /.post-info -->                <p>The problem is <a href="https://leetcode.com/problems/valid-palindrome/">125. Valid Palindrome</a>. 
+It's quite simple to make a simple one.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">def</span> <span class="n">isPalindrome</span>(<span class="k">self</span>, <span class="o">s</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type s: str</span>
+<span class="s">        :rtype: bool</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="o">s</span> == <span class="s">&#39;&#39;</span>: <span class="k">return</span> <span class="nb">True</span>
+
+        <span class="n">cs</span> = <span class="s">&#39;abcdefghijklmnopqrstuvwxyz0123456789&#39;</span>
+        <span class="n">is_char</span> = <span class="n">lambda</span> <span class="n">c:</span> <span class="n">c</span> <span class="n">in</span> <span class="n">cs</span>
+        <span class="n">to_sstr</span> = <span class="n">lambda</span> <span class="o">s</span>: <span class="s">&#39;&#39;</span>.<span class="nb">join</span>([ <span class="n">c</span> <span class="k">if</span> <span class="n">is_char</span>(<span class="n">c</span>) <span class="k">else</span> <span class="s">&#39;&#39;</span> <span class="k">for</span> <span class="n">c ...</span></pre></div>
+                <a class="readmore" href="/posts/2016/125-valid-palindrome.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/posts/2016/simple-fizz-buzz-quizz.html" rel="bookmark"
                            title="Permalink to Simple Fizz Buzz Quizz">Simple Fizz Buzz Quizz</a></h1>
                 </header>
@@ -360,29 +394,6 @@ As I experienced before in Ubuntu 12.04 and other dists, the VNCServer is a good
 
 </footer><!-- /.post-info -->                <p>Video/Audio processing is not easy as far as I know, and the FFmpeg is like the Swiss Knife in my thought. In this case, I've some FLV files stored in Hadoop. I want to make it playable on web page without Flash plugins. The solution is quite simple ...</p>
                 <a class="readmore" href="/posts/2016/ffmpeg-is-amazing-a-simple-tip-for-html5-use-case.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2016/the-network-is-really-bad.html" rel="bookmark"
-                           title="Permalink to The network is really bad!">The network is really bad!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-20T21:59:00+08:00">
-                Published: 周三 20 一月 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/development.html">development</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Recently, I want to have a look at development of Android App. The first thing, of cause, go to the homepage of Android. But the site couldn't be opened, as I thought, of cause. </p>
-<p>OK, there are some mirror-sites, but which is latest and/or reliable? After installed the ...</p>
-                <a class="readmore" href="/posts/2016/the-network-is-really-bad.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
