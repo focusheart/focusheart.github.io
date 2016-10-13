@@ -29,6 +29,9 @@ ARTICLE_SAVE_AS = 'posts/{date:%Y}/{slug}.html'
 PAGE_URL = 'pages/{slug}.html'
 PAGE_SAVE_AS = 'pages/{slug}.html'
 
+DEFAULT_DATE_FORMAT = '%Y-%m-%d'
+
+THEME = 'notmyidea'
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
@@ -36,8 +39,7 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Jinja2', 'http://jinja.pocoo.org/'),)
 
 # Social widget
-SOCIAL = (('GitHub', 'http://github.com'),
-          ('jandan', 'http://jandan.net'),)
+SOCIAL = (('GitHub', 'http://github.com'),)
 
 DEFAULT_PAGINATION = 10
 
