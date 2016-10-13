@@ -1,6 +1,7 @@
 Title: Ubuntu Tricks?
 Date: 2016-01-14 17:06
 Category: development
+tags: shell
 
 There are lots of tricks or tips when I use Linux. Most of time I use Ubuntu. Here, I want to record some experiences during my work on Ubuntu.
 

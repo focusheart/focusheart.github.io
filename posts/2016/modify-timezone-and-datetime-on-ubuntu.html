@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>In memory of Satoru Iwata</title>
+        <title>Modify timezone and datetime on Ubuntu</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,32 +15,48 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li><a href="/category/development.html">development</a></li>
+                    <li class="active"><a href="/category/development.html">development</a></li>
                     <li><a href="/category/online-judge.html">Online-Judge</a></li>
-                    <li class="active"><a href="/category/whatever.html">whatever</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="/posts/2015/in-memory-of-satoru-iwata.html" rel="bookmark"
-           title="Permalink to In memory of Satoru Iwata">In memory of Satoru Iwata</a></h1>
+        <a href="/posts/2016/modify-timezone-and-datetime-on-ubuntu.html" rel="bookmark"
+           title="Permalink to Modify timezone and datetime on Ubuntu">Modify timezone and datetime on Ubuntu</a></h1>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-07-13T20:34:00+08:00">
-                Published: 周一 13 七月 2015
+        <abbr class="published" title="2016-10-12T00:00:00+08:00">
+                Published: 周三 12 十月 2016
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/focus.html">Focus</a>
         </address>
-<p>In <a href="/category/whatever.html">whatever</a>.</p>
-<p>tags: <a href="/tag/game.html">game</a> </p>
-</footer><!-- /.post-info -->      <p>I really love Nintendo Games, when I was a little child and at present. The feeling is sad when saw the message. What he and his pals created gave me great pleasure and was like a old friend in my life, although he didn't know me. Anyway, thank you, Mr. Iwata, RIP.
-<img alt="Thank you" src="/content/images/imsi.jpg" /></p>
+<p>In <a href="/category/development.html">development</a>.</p>
+<p>tags: <a href="/tag/shell.html">shell</a> </p>
+</footer><!-- /.post-info -->      <p>Some configurations commands for Ubuntu server:</p>
+<div class="highlight"><pre><span></span>$ tzselect
+
+<span class="c1"># Since I&#39;m in China, I select the Asia -&gt; China -&gt; Beijing Time</span>
+<span class="c1"># The TZ=&#39;Asia/Shanghai&#39;</span>
+
+<span class="c1"># Update the localtime profile</span>
+$ sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+<span class="c1"># Update datetime by time center</span>
+$ sudo ntpdate asia.pool.ntp.org
+
+<span class="c1"># Update the hardware time</span>
+$ sudo hwclock --systohc
+</pre></div>
+
+
+<p>Done!</p>
     </div><!-- /.entry-content -->
 
   </article>

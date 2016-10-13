@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Sit down, write down, light up - Development</title>
+        <title>Sit down, write down, light up - development</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,7 +15,7 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li class="active"><a href="/category/development.html">Development</a></li>
+                    <li class="active"><a href="/category/development.html">development</a></li>
                     <li><a href="/category/online-judge.html">Online-Judge</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
@@ -23,7 +23,74 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/install-jupyter-environment.html">Install Jupyter Environment</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/install-mysqldb-in-virtualenv-on-ubuntu.html">Install MySQLdb in virtualenv on Ubuntu</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-10-12T00:00:00+08:00">
+                Published: 周三 12 十月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+<p>tags: <a href="/tag/shell.html">shell</a> </p>
+</footer><!-- /.post-info --><p>I have install the python-mysqldb on my Ubuntu server,
+but a missing dependency message alerted when I run a program in virtualenv.</p>
+<p>Then I do as <a href="http://www.saltycrane.com/blog/2010/02/install-mysqldb-virtualenv-ubuntu-karmic/">this post</a> and solved my problem:</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get build-dep python-mysqldb
+$ <span class="nb">source</span> venv/bin/activate
+<span class="o">(</span>venv<span class="o">)</span>$ pip install MySQL-python
+</pre></div>
+
+
+<p>then everything works fine.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/modify-timezone-and-datetime-on-ubuntu.html" rel="bookmark"
+                           title="Permalink to Modify timezone and datetime on Ubuntu">Modify timezone and datetime on Ubuntu</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-12T00:00:00+08:00">
+                Published: 周三 12 十月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+<p>tags: <a href="/tag/shell.html">shell</a> </p>
+</footer><!-- /.post-info -->                <p>Some configurations commands for Ubuntu server:</p>
+<div class="highlight"><pre><span></span>$ tzselect
+
+<span class="c1"># Since I&#39;m in China, I select the Asia -&gt; China -&gt; Beijing Time</span>
+<span class="c1"># The TZ=&#39;Asia/Shanghai&#39;</span>
+
+<span class="c1"># Update the localtime profile</span>
+$ sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+<span class="c1"># Update datetime by time center</span>
+$ sudo ntpdate asia.pool.ntp.org
+
+<span class="c1"># Update the hardware ...</span></pre></div>
+                <a class="readmore" href="/posts/2016/modify-timezone-and-datetime-on-ubuntu.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/install-jupyter-environment.html" rel="bookmark"
+                           title="Permalink to Install Jupyter Environment">Install Jupyter Environment</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-10-10T22:54:00+08:00">
                 Published: 周一 10 十月 2016
@@ -34,7 +101,7 @@
         </address>
 <p>In <a href="/category/development.html">Development</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info --><p>In order to start my own work on data analysis into EDM, 
+</footer><!-- /.post-info -->                <p>In order to start my own work on data analysis into EDM, 
 I need a development environment of Python Notebook.
 The process is quite simple:</p>
 <p>Install the <code>virtualenv</code> and related packages:</p>
@@ -45,99 +112,10 @@ The process is quite simple:</p>
 <p>Create a virtual environment for project:</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/workspace
 $ virtualenv edm
-$ <span class="nb">source</span> edm/bin/activate
-</pre></div>
-
-
-<p>Update the pip source to improve the download speed, follow the instruction of 
-<a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">TUNA of THU</a></p>
-<p>Update the <code>pip</code>:</p>
-<div class="highlight"><pre><span></span>(edm)$ pip install --upgrade pip
-</pre></div>
-
-
-<p>Install the jupyter, follow <a href="https://jupyter.readthedocs.io/en/latest/install.html">official instruction</a>:</p>
-<div class="highlight"><pre><span></span>(edm)$ pip install jupyter
-</pre></div>
-
-
-<p>Install some optional packages:</p>
-<div class="highlight"><pre><span></span>(edm)$ pip install numpy scipy scikit-learn glances matplotlib requests flask pyt
-</pre></div>
-
-
-<p>Generate a jupyter config profile:</p>
-<div class="highlight"><pre><span></span>(edm)$ jupyter notebook --generate-config
-(edm)$ vim ~/.jupyter/jupyter_notebook_config.py
-</pre></div>
-
-
-<p>We can change the settings of notebook, for example:</p>
-<div class="highlight"><pre><span></span>c.NotebookApp.port = 8765
-c.NotebookApp.ip = &#39;0.0.0.0&#39;
-c.NotebookApp.open_browser = False
-c.NotebookApp.allow_origin = &#39;*&#39;
-</pre></div>
-
-
-<p>Start the notebook server under any folder:</p>
-<div class="highlight"><pre><span></span>(edm)$ cd ~/workspace
-(edm)$ jupyter notebook
-</pre></div>
-
-
-<h2>One more thing</h2>
-<p>In my case, the jupyter notebook server is located in inner network, 
-which is not accessible from my laptop and desktop.
-I setup a nginx proxy for this purpose then.</p>
-<p>On the proxy gateway machine A, write a configuration file.
-Basicly, this file specify the domain name and reverse proxy host,
-and the most important config is the proxy for WebSocket:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /etc/nginx/site-available
-$ sudo vim 009-jupyter-proxy.conf
-
-<span class="c1"># Add the following content, any server_name is OK:</span>
-
-server <span class="o">{</span>
-    listen 80<span class="p">;</span>
-    server_name jupyter.my.com<span class="p">;</span>
-
-    location / <span class="o">{</span>
-        proxy_redirect off<span class="p">;</span>
-        proxy_pass http://192.168.1.188:8765<span class="p">;</span>
-        proxy_http_version 1.1<span class="p">;</span>
-        proxy_set_header Upgrade <span class="nv">$http_upgrade</span><span class="p">;</span>
-        proxy_set_header Connection <span class="s2">&quot;upgrade&quot;</span><span class="p">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<p>Link the configuration file and restart Nginx:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /etc/nginx/site-enabled
-$ sudo ln -s ../site-available/009-jupyter-proxy.conf ./
-$ sudo /etc/init.d/nginx restart
-</pre></div>
-
-
-<p>Because I configured a domain name for the reverse proxy,
-I must add this domain name to DNS server or local DNS parse file on my laptop:</p>
-<div class="highlight"><pre><span></span>$ sudo vim /etc/hosts
-
-<span class="c1"># Add the following:</span>
-IP-of-machine-A        jupyter.my.com
-</pre></div>
-
-
-<p>Then I can access this jupyter notebook on my laptop:</p>
-<div class="highlight"><pre><span></span>$ lynx IP-of-machine-A
-<span class="c1"># or use Firefox, Chrome, etc.</span>
-</pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+$ <span class="nb">source</span> edm/bin ...</pre></div>
+                <a class="readmore" href="/posts/2016/install-jupyter-environment.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -316,53 +294,6 @@ As I experienced before in Ubuntu 12.04 and other dists, the VNCServer is a good
 </footer><!-- /.post-info -->                <p>Recently, I want to have a look at development of Android App. The first thing, of cause, go to the homepage of Android. But the site couldn't be opened, as I thought, of cause. </p>
 <p>OK, there are some mirror-sites, but which is latest and/or reliable? After installed the ...</p>
                 <a class="readmore" href="/posts/2016/the-network-is-really-bad.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2016/password.html" rel="bookmark"
-                           title="Permalink to Password!">Password!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-18T10:17:00+08:00">
-                Published: 周一 18 一月 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/development.html">Development</a>.</p>
-<p>tags: <a href="/tag/ubuntu.html">Ubuntu</a> </p>
-</footer><!-- /.post-info -->                <h2>When I forgot password...</h2>
-<p>Password! I have lots of machines to manage, and passwords to remember. Therefore sometimes I can not remember a password when I login to a machine. There are some simple methods to remember, for example I can write the password on a notebook. Even though that ...</p>
-                <a class="readmore" href="/posts/2016/password.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2016/ubuntu-tricks.html" rel="bookmark"
-                           title="Permalink to Ubuntu Tricks?">Ubuntu Tricks?</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-14T17:06:00+08:00">
-                Published: 周四 14 一月 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/development.html">development</a>.</p>
-
-</footer><!-- /.post-info -->                <p>There are lots of tricks or tips when I use Linux. Most of time I use Ubuntu. Here, I want to record some experiences during my work on Ubuntu.</p>
-<h2>NO password when sudo</h2>
-<p>It's not safe for a normal user to do root's matters. As result, there is ...</p>
-                <a class="readmore" href="/posts/2016/ubuntu-tricks.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->

@@ -15,7 +15,7 @@
                 <h1><a href="/">Sit down, write down, light up </a></h1>
                 <nav><ul>
                     <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li><a href="/category/development.html">Development</a></li>
+                    <li><a href="/category/development.html">development</a></li>
                     <li class="active"><a href="/category/online-judge.html">Online-Judge</a></li>
                     <li><a href="/category/whatever.html">whatever</a></li>
                 </ul></nav>
@@ -61,43 +61,44 @@ It's quite simple to make a simple one.</p>
 <p>The solution is a dirty work, although it works. 
 The runtime is 159ms, which beats 10.03% of python submissions.
 It's really too bad, then I modified it:</p>
-<p>class Solution(object):
-    cs = 'abcdefghijklmnopqrstuvwxyz0123456789'</p>
-<div class="highlight"><pre><span></span>def is_char(self, c):
-    return c in self.cs
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">cs</span> = <span class="s">&#39;abcdefghijklmnopqrstuvwxyz0123456789&#39;</span>
 
-def isPalindrome(self, s):
-    &quot;&quot;&quot;
-    :type s: str
-    :rtype: bool
-    &quot;&quot;&quot;
-    if s == &#39;&#39; or len(s) == 1: return True
-    s = s.lower()
+    <span class="n">def</span> <span class="n">is_char</span>(<span class="k">self</span>, <span class="n">c</span>):
+        <span class="k">return</span> <span class="n">c</span> <span class="n">in</span> <span class="k">self</span>.<span class="n">cs</span>
 
-    i = 0
-    j = len(s) - 1
-    flag = True
+    <span class="n">def</span> <span class="n">isPalindrome</span>(<span class="k">self</span>, <span class="o">s</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type s: str</span>
+<span class="s">        :rtype: bool</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="o">s</span> == <span class="s">&#39;&#39;</span> <span class="o">or</span> <span class="n">len</span>(<span class="o">s</span>) == <span class="mi">1</span>: <span class="k">return</span> <span class="nb">True</span>
+        <span class="o">s</span> = <span class="o">s</span>.<span class="n">lower</span>()
 
-    while i &lt; j:
-        ci = s[i]
-        if not self.is_char(ci):
-            i += 1
-            continue
+        <span class="n">i</span> = <span class="mi">0</span>
+        <span class="n">j</span> = <span class="n">len</span>(<span class="o">s</span>) - <span class="mi">1</span>
+        <span class="n">flag</span> = <span class="nb">True</span>
 
-        cj = s[j]
-        if not self.is_char(cj):
-            j -= 1
-            continue
+        <span class="k">while</span> <span class="n">i</span> &lt; <span class="n">j:</span>
+            <span class="n">ci</span> = <span class="o">s</span>[<span class="n">i</span>]
+            <span class="k">if</span> <span class="nb">not</span> <span class="k">self</span>.<span class="n">is_char</span>(<span class="n">ci</span>):
+                <span class="n">i</span> += <span class="mi">1</span>
+                <span class="k">continue</span>
 
-        if ci == cj:
-            i += 1
-            j -= 1
-            continue
-        else:
-            flag = False
-            break
+            <span class="n">cj</span> = <span class="o">s</span>[<span class="n">j</span>]
+            <span class="k">if</span> <span class="nb">not</span> <span class="k">self</span>.<span class="n">is_char</span>(<span class="n">cj</span>):
+                <span class="n">j</span> -= <span class="mi">1</span>
+                <span class="k">continue</span>
 
-    return flag
+            <span class="k">if</span> <span class="n">ci</span> == <span class="n">cj:</span>
+                <span class="n">i</span> += <span class="mi">1</span>
+                <span class="n">j</span> -= <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="n">else:</span>
+                <span class="n">flag</span> = <span class="nb">False</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">flag</span>
 </pre></div>
 
 

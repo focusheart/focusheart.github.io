@@ -29,43 +29,43 @@ The solution is a dirty work, although it works.
 The runtime is 159ms, which beats 10.03% of python submissions.
 It's really too bad, then I modified it:
 
-class Solution(object):
-    cs = 'abcdefghijklmnopqrstuvwxyz0123456789'
-    
-    def is_char(self, c):
-        return c in self.cs
+    class Solution(object):
+        cs = 'abcdefghijklmnopqrstuvwxyz0123456789'
         
-    def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        if s == '' or len(s) == 1: return True
-        s = s.lower()
-        
-        i = 0
-        j = len(s) - 1
-        flag = True
-        
-        while i < j:
-            ci = s[i]
-            if not self.is_char(ci):
-                i += 1
-                continue
+        def is_char(self, c):
+            return c in self.cs
             
-            cj = s[j]
-            if not self.is_char(cj):
-                j -= 1
-                continue
+        def isPalindrome(self, s):
+            """
+            :type s: str
+            :rtype: bool
+            """
+            if s == '' or len(s) == 1: return True
+            s = s.lower()
             
-            if ci == cj:
-                i += 1
-                j -= 1
-                continue
-            else:
-                flag = False
-                break
-        
-        return flag
-        
+            i = 0
+            j = len(s) - 1
+            flag = True
+            
+            while i < j:
+                ci = s[i]
+                if not self.is_char(ci):
+                    i += 1
+                    continue
+                
+                cj = s[j]
+                if not self.is_char(cj):
+                    j -= 1
+                    continue
+                
+                if ci == cj:
+                    i += 1
+                    j -= 1
+                    continue
+                else:
+                    flag = False
+                    break
+            
+            return flag
+            
 The runtime is 129ms, which beats 18.03%, better but not enough.
