@@ -1,5 +1,5 @@
 Title: LeetCode: 48. Rotate Image
-Date: 2016-10-20
+Date: 2016-10-19
 Category: Online-Judge
 
 The problem is [Rotate Image](https://leetcode.com/problems/rotate-image/). 
