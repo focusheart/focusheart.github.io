@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>LeetCode: 125. Valid Palindrome</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Sit down, write down, light up </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about-me.html">About Me</a></li>
+                    <li><a href="/category/development.html">development</a></li>
+                    <li class="active"><a href="/category/online-judge.html">Online-Judge</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2016/leetcode-125-valid-palindrome.html" rel="bookmark"
+           title="Permalink to LeetCode: 125. Valid Palindrome">LeetCode: 125. Valid Palindrome</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-08T11:43:00+08:00">
+                Published: 2016-10-08
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
+
+</footer><!-- /.post-info -->      <p>The problem is <a href="https://leetcode.com/problems/valid-palindrome/">125. Valid Palindrome</a>. 
+It's quite simple to make a simple one.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">def</span> <span class="n">isPalindrome</span>(<span class="k">self</span>, <span class="o">s</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type s: str</span>
+<span class="s">        :rtype: bool</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="o">s</span> == <span class="s">&#39;&#39;</span>: <span class="k">return</span> <span class="nb">True</span>
+
+        <span class="n">cs</span> = <span class="s">&#39;abcdefghijklmnopqrstuvwxyz0123456789&#39;</span>
+        <span class="n">is_char</span> = <span class="n">lambda</span> <span class="n">c:</span> <span class="n">c</span> <span class="n">in</span> <span class="n">cs</span>
+        <span class="n">to_sstr</span> = <span class="n">lambda</span> <span class="o">s</span>: <span class="s">&#39;&#39;</span>.<span class="nb">join</span>([ <span class="n">c</span> <span class="k">if</span> <span class="n">is_char</span>(<span class="n">c</span>) <span class="k">else</span> <span class="s">&#39;&#39;</span> <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="o">s</span>])
+
+        <span class="n">sl</span> = <span class="o">s</span>.<span class="n">lower</span>()
+        <span class="n">ss</span> = <span class="n">to_sstr</span>(<span class="n">sl</span>)
+
+        <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="n">range</span>(<span class="n">len</span>(<span class="n">ss</span>)/<span class="mi">2</span>):
+            <span class="k">if</span> <span class="n">ss</span>[<span class="n">i</span>] != <span class="n">ss</span>[<span class="n">len</span>(<span class="n">ss</span>)-<span class="mi">1</span><span class="o">-</span><span class="n">i</span>]:
+                <span class="k">return</span> <span class="nb">False</span>
+        <span class="k">return</span> <span class="nb">True</span>
+</pre></div>
+
+
+<p>The solution is a dirty work, although it works. 
+The runtime is 159ms, which beats 10.03% of python submissions.
+It's really too bad, then I modified it:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">cs</span> = <span class="s">&#39;abcdefghijklmnopqrstuvwxyz0123456789&#39;</span>
+
+    <span class="n">def</span> <span class="n">is_char</span>(<span class="k">self</span>, <span class="n">c</span>):
+        <span class="k">return</span> <span class="n">c</span> <span class="n">in</span> <span class="k">self</span>.<span class="n">cs</span>
+
+    <span class="n">def</span> <span class="n">isPalindrome</span>(<span class="k">self</span>, <span class="o">s</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type s: str</span>
+<span class="s">        :rtype: bool</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="o">s</span> == <span class="s">&#39;&#39;</span> <span class="o">or</span> <span class="n">len</span>(<span class="o">s</span>) == <span class="mi">1</span>: <span class="k">return</span> <span class="nb">True</span>
+        <span class="o">s</span> = <span class="o">s</span>.<span class="n">lower</span>()
+
+        <span class="n">i</span> = <span class="mi">0</span>
+        <span class="n">j</span> = <span class="n">len</span>(<span class="o">s</span>) - <span class="mi">1</span>
+        <span class="n">flag</span> = <span class="nb">True</span>
+
+        <span class="k">while</span> <span class="n">i</span> &lt; <span class="n">j:</span>
+            <span class="n">ci</span> = <span class="o">s</span>[<span class="n">i</span>]
+            <span class="k">if</span> <span class="nb">not</span> <span class="k">self</span>.<span class="n">is_char</span>(<span class="n">ci</span>):
+                <span class="n">i</span> += <span class="mi">1</span>
+                <span class="k">continue</span>
+
+            <span class="n">cj</span> = <span class="o">s</span>[<span class="n">j</span>]
+            <span class="k">if</span> <span class="nb">not</span> <span class="k">self</span>.<span class="n">is_char</span>(<span class="n">cj</span>):
+                <span class="n">j</span> -= <span class="mi">1</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">ci</span> == <span class="n">cj:</span>
+                <span class="n">i</span> += <span class="mi">1</span>
+                <span class="n">j</span> -= <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="n">else:</span>
+                <span class="n">flag</span> = <span class="nb">False</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">flag</span>
+</pre></div>
+
+
+<p>The runtime is 129ms, which beats 18.03%, better but not enough.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

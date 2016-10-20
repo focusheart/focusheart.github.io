@@ -1,4 +1,4 @@
-Title: Simple Fizz Buzz Quizz
+Title: LeetCode: 412. Fizz Buzz
 Date: 2016-10-08 11:43
 Category: Online-Judge
 
