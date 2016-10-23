@@ -40,7 +40,7 @@ The following is my solution:
         
 Recursive function is more elegant than other forms, 
 but if the depth of BST is large, the recursive stack may overflow.
-Generally, the size of a balanced BST grows exponentially, 
+Generally, the size of a balanced BST grows exponentially while the depth grows linearly, 
 we won't worry the problem of stack overflow.
 If it is not balanced, then we could traverse the tree to do this.
 The following is my solution, no recursion:

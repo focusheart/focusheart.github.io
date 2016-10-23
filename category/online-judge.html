@@ -23,7 +23,96 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/leetcode-235-lowest-common-ancestor-of-a-binary-search-tree.html">LeetCode: 235. Lowest Common Ancestor of a Binary Search Tree</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/leetcode-112-path-sum.html">LeetCode: 112. Path Sum</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-10-22T00:00:00+08:00">
+                Published: 2016-10-22
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
+
+</footer><!-- /.post-info --><p>The problem is here: https://leetcode.com/problems/path-sum/ .
+Fancy that the number can be negative numbers, I made a stupid 'optimization'.
+I added a piece of code to check whether current node value is bigger than <code>sum</code>,
+assuming that every node value is positive.
+After droping this 'optimization', it works.</p>
+<div class="highlight"><pre><span></span><span class="c c-Singleline"># Definition for a binary tree node.</span>
+<span class="c c-Singleline"># class TreeNode(object):</span>
+<span class="c c-Singleline">#     def __init__(self, x):</span>
+<span class="c c-Singleline">#         self.val = x</span>
+<span class="c c-Singleline">#         self.left = None</span>
+<span class="c c-Singleline">#         self.right = None</span>
+
+<span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">def</span> <span class="n">hasPathSum</span>(<span class="k">self</span>, <span class="n">root</span>, <span class="nb">sum</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type root: TreeNode</span>
+<span class="s">        :type sum: int</span>
+<span class="s">        :rtype: bool</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">root</span> <span class="k">is</span> <span class="n">None:</span>
+            <span class="k">return</span> <span class="nb">False</span>
+
+        <span class="k">if</span> <span class="n">root</span>.<span class="n">left</span> <span class="k">is</span> <span class="n">None</span> \
+            <span class="o">and</span> <span class="n">root</span>.<span class="n">right</span> <span class="k">is</span> <span class="n">None</span> \
+            <span class="o">and</span> <span class="n">root</span>.<span class="n">val</span> == <span class="n">sum:</span>
+            <span class="k">return</span> <span class="nb">True</span>
+
+        <span class="k">return</span> <span class="k">self</span>.<span class="n">hasPathSum</span>(<span class="n">root</span>.<span class="n">left</span>, <span class="n">sum-root</span>.<span class="n">val</span>) \
+            <span class="o">or</span> <span class="k">self</span>.<span class="n">hasPathSum</span>(<span class="n">root</span>.<span class="n">right</span>, <span class="n">sum-root</span>.<span class="n">val</span>)
+</pre></div>
+
+
+<p>I think maybe this is a DSP?</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/leetcode-201-bitwise-and-of-numbers-range.html" rel="bookmark"
+                           title="Permalink to LeetCode: 201. Bitwise AND of Numbers Range">LeetCode: 201. Bitwise AND of Numbers Range</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-21T00:00:00+08:00">
+                Published: 2016-10-21
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
+
+</footer><!-- /.post-info -->                <p>The problem is here: https://leetcode.com/problems/bitwise-and-of-numbers-range/ .
+I simply wrote a silly version and failed as expected,
+it just did exactly as this problem described.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">def</span> <span class="n">rangeBitwiseAnd</span>(<span class="k">self</span>, <span class="sr">m, n):</span>
+<span class="sr">        &quot;&quot;&quot;</span>
+<span class="sr">        Attention! This is a bad version!</span>
+<span class="sr">        :type m: int</span>
+<span class="sr">        :type n: int</span>
+<span class="sr">        :rtype: int</span>
+<span class="sr">        &quot;&quot;&quot;</span>
+<span class="sr">        return ...</span></pre></div>
+                <a class="readmore" href="/posts/2016/leetcode-201-bitwise-and-of-numbers-range.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/leetcode-235-lowest-common-ancestor-of-a-binary-search-tree.html" rel="bookmark"
+                           title="Permalink to LeetCode: 235. Lowest Common Ancestor of a Binary Search Tree">LeetCode: 235. Lowest Common Ancestor of a Binary Search Tree</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-10-20T00:00:00+08:00">
                 Published: 2016-10-20
@@ -34,87 +123,14 @@
         </address>
 <p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
 
-</footer><!-- /.post-info --><p>The problem is here: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ .
+</footer><!-- /.post-info -->                <p>The problem is here: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ .
 Using recursive function solve this fast, because of the nature of BST.
 For each node in BST, 
 every node on left is smaller than root and every node on right.
-Therefore, the ancestor of two nodes in BST must be a root of sub-tree of root.
-The following is my solution:</p>
-<div class="highlight"><pre><span></span><span class="c c-Singleline"># Definition for a binary tree node.</span>
-<span class="c c-Singleline"># class TreeNode(object):</span>
-<span class="c c-Singleline">#     def __init__(self, x):</span>
-<span class="c c-Singleline">#         self.val = x</span>
-<span class="c c-Singleline">#         self.left = None</span>
-<span class="c c-Singleline">#         self.right = None</span>
-
-<span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
-    <span class="n">def</span> <span class="n">lowestCommonAncestor</span>(<span class="k">self</span>, <span class="n">root</span>, <span class="n">p</span>, <span class="s">q):</span>
-<span class="s">        &quot;&quot;&quot;</span>
-<span class="s">        :type root: TreeNode</span>
-<span class="s">        :type p: TreeNode</span>
-<span class="s">        :type q: TreeNode</span>
-<span class="s">        :rtype: TreeNode</span>
-<span class="s">        &quot;&quot;&quot;</span>
-<span class="s">        if p.val == root.val or q.val == root.val:</span>
-<span class="s">            return root</span>
-
-<span class="s">        if p.val &lt; root.val:</span>
-<span class="s">            if q.val &lt; root.val:</span>
-<span class="s">                return self.lowestCommonAncestor(root.left, p, q)</span>
-            <span class="n">else:</span>
-                <span class="k">return</span> <span class="n">root</span>
-        <span class="n">else:</span>
-            <span class="k">if</span> <span class="s">q.val &lt; root.</span><span class="n">val:</span>
-                <span class="k">return</span> <span class="n">root</span>
-            <span class="n">else:</span>
-                <span class="k">return</span> <span class="k">self</span>.<span class="n">lowestCommonAncestor</span>(<span class="n">root</span>.<span class="n">right</span>, <span class="n">p</span>, <span class="s">q)</span>
-</pre></div>
-
-
-<p>Recursive function is more elegant than other forms, 
-but if the depth of BST is large, the recursive stack may overflow.
-Generally, the size of a balanced BST grows exponentially, 
-we won't worry the problem of stack overflow.
-If it is not balanced, then we could traverse the tree to do this.
-The following is my solution, no recursion:</p>
-<div class="highlight"><pre><span></span><span class="c c-Singleline"># Definition for a binary tree node.</span>
-<span class="c c-Singleline"># class TreeNode(object):</span>
-<span class="c c-Singleline">#     def __init__(self, x):</span>
-<span class="c c-Singleline">#         self.val = x</span>
-<span class="c c-Singleline">#         self.left = None</span>
-<span class="c c-Singleline">#         self.right = None</span>
-
-<span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
-    <span class="n">def</span> <span class="n">lowestCommonAncestor</span>(<span class="k">self</span>, <span class="n">root</span>, <span class="n">p</span>, <span class="s">q):</span>
-<span class="s">        &quot;&quot;&quot;</span>
-<span class="s">        :type root: TreeNode</span>
-<span class="s">        :type p: TreeNode</span>
-<span class="s">        :type q: TreeNode</span>
-<span class="s">        :rtype: TreeNode</span>
-<span class="s">        &quot;&quot;&quot;</span>
-<span class="s">        cur = root</span>
-<span class="s">        while cur is not None:</span>
-<span class="s">            if p.val == cur.val or q.val == cur.val:</span>
-<span class="s">                break</span>
-<span class="s">            if p.val &lt; cur.val:</span>
-<span class="s">                if q.val &lt; cur.val:</span>
-<span class="s">                    cur = cur.left</span>
-<span class="s">                    continue</span>
-<span class="s">                else:</span>
-<span class="s">                    break</span>
-<span class="s">            else:</span>
-<span class="s">                if q.val &lt; cur.val:</span>
-<span class="s">                    break</span>
-<span class="s">                else:</span>
-<span class="s">                    cur = cur.right</span>
-<span class="s">                    continue</span>
-<span class="s">        return cur</span>
-</pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+Therefore, the ancestor of two nodes in BST must be a ...</p>
+                <a class="readmore" href="/posts/2016/leetcode-235-lowest-common-ancestor-of-a-binary-search-tree.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
