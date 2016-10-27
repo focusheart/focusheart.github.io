@@ -8,7 +8,7 @@ After bought some accessories, I re-installed a Xubuntu 16.04 system on it.
 Even at present, the design of this laptop is in fashion.
 All four borders of screen are thin and can be filpped more than 180 degrees.
 
-![ThinkPad X61](/content/images/x61.jpg)
+<img src="/content/images/x61.jpg" width="100%" />
 
 Compared with the current types of ThinkPad X series,
 I prefer the classical types more!
