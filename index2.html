@@ -25,6 +25,37 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/posts/2016/install-mysqldb-in-virtualenv-on-ubuntu.html" rel="bookmark"
+                           title="Permalink to Install MySQLdb in virtualenv on Ubuntu">Install MySQLdb in virtualenv on Ubuntu</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-12T00:00:00+08:00">
+                Published: 2016-10-12
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+<p>tags: <a href="/tag/shell.html">shell</a> </p>
+</footer><!-- /.post-info -->                <p>I have install the python-mysqldb on my Ubuntu server,
+but a missing dependency message alerted when I run a program in virtualenv.</p>
+<p>Then I do as <a href="http://www.saltycrane.com/blog/2010/02/install-mysqldb-virtualenv-ubuntu-karmic/">this post</a> and solved my problem:</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get build-dep python-mysqldb
+$ <span class="nb">source</span> venv/bin/activate
+<span class="o">(</span>venv<span class="o">)</span>$ pip install MySQL-python
+</pre></div>
+
+
+<p>then everything works fine.</p>
+                <a class="readmore" href="/posts/2016/install-mysqldb-in-virtualenv-on-ubuntu.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/posts/2016/modify-timezone-and-datetime-on-ubuntu.html" rel="bookmark"
                            title="Permalink to Modify timezone and datetime on Ubuntu">Modify timezone and datetime on Ubuntu</a></h1>
                 </header>
@@ -300,29 +331,6 @@ However, the <code>apt-get</code> update is not that well.
 Download speed often fluctuates in the daytime, maybe due to great amount of users.
 The speed in late night is quite good, but I can't install softwares at that time ...</p>
                 <a class="readmore" href="/posts/2016/you-should-have-a-local-apt-mirror.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2016/vncserver-finally-works-on-my-ubuntu-1404.html" rel="bookmark"
-                           title="Permalink to VNCServer finally works on my Ubuntu 14.04">VNCServer finally works on my Ubuntu 14.04</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-03-29T10:15:00+08:00">
-                Published: 2016-03-29
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/development.html">Development</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Finally, the VNCServer works for me on my Ubuntu 14.04.
-As I experienced before in Ubuntu 12.04 and other dists, the VNCServer is a good choice to control computer remotely. However, it's changed since I installed Ubuntu 14.04. I can NOT get the "Desktop" when I ...</p>
-                <a class="readmore" href="/posts/2016/vncserver-finally-works-on-my-ubuntu-1404.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->

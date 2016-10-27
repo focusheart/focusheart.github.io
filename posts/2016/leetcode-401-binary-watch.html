@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>LeetCode: 401. Binary Watch</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Sit down, write down, light up </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about-me.html">About Me</a></li>
+                    <li><a href="/category/development.html">development</a></li>
+                    <li class="active"><a href="/category/online-judge.html">Online-Judge</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2016/leetcode-401-binary-watch.html" rel="bookmark"
+           title="Permalink to LeetCode: 401. Binary Watch">LeetCode: 401. Binary Watch</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-27T00:00:00+08:00">
+                Published: 2016-10-27
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
+
+</footer><!-- /.post-info -->      <p>The problem is https://leetcode.com/problems/binary-watch/.
+Because the input size is limited, generating every output is workable.
+Simplely follow the input, using <code>itertools</code> could generate all combinations.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="n">digitals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_xtime</span><span class="p">(</span><span class="n">ps</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">:</span> <span class="n">h</span> <span class="o">+=</span> <span class="n">digitals</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">m</span> <span class="o">+=</span> <span class="n">digitals</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="n">xt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">12</span> <span class="ow">and</span> <span class="n">xt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">60</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">fmt_time</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># generate all</span>
+<span class="n">all_outputs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">pses</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ps</span> <span class="ow">in</span> <span class="n">pses</span><span class="p">:</span>
+        <span class="n">xt</span> <span class="o">=</span> <span class="n">get_xtime</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+        <span class="n">fg</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">xt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fg</span><span class="p">:</span>
+            <span class="n">all_outputs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_outputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">all_outputs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fmt_time</span><span class="p">(</span><span class="n">xt</span><span class="p">))</span>
+
+<span class="k">print</span> <span class="n">all_outputs</span>
+</pre></div>
+
+
+<p>Then, the solution is simple:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">all_outputs</span> = {<span class="mi">0</span>:[<span class="s">&#39;0:00&#39;</span>], ...}  <span class="c c-Singleline"># A dict object</span>
+
+    <span class="n">def</span> <span class="n">readBinaryWatch</span>(<span class="k">self</span>, <span class="nb">num</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type num: int</span>
+<span class="s">        :rtype: List[str]</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="n">try:</span>
+            <span class="k">return</span> <span class="k">self</span>.<span class="n">all_outputs</span>[<span class="nb">num</span>]
+        <span class="n">except:</span>
+            <span class="k">return</span> []
+</pre></div>
+
+
+<p>The performance of above program is in the middle.
+Also, using the origin program as follows is fine:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">def</span> <span class="n">readBinaryWatch</span>(<span class="k">self</span>, <span class="nb">num</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type num: int</span>
+<span class="s">        :rtype: List[str]</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="n">digitals</span> = [<span class="mi">8</span>, <span class="mi">4</span>, <span class="mi">2</span>, <span class="mi">1</span>, <span class="mi">32</span>, <span class="mi">16</span>, <span class="mi">8</span>, <span class="mi">4</span>, <span class="mi">2</span>, <span class="mi">1</span>]
+
+        <span class="n">def</span> <span class="n">get_xtime</span>(<span class="n">ps</span>):
+            <span class="n">h</span> = <span class="mi">0</span>
+            <span class="sr">m = 0</span>
+<span class="sr">            for p in ps:</span>
+<span class="sr">                if p&lt;4: h +=</span> <span class="n">digitals</span>[<span class="n">p</span>]
+                <span class="n">else:</span> <span class="sr">m += digitals[p]</span>
+<span class="sr">            return (h, m)</span>
+
+<span class="sr">        def is_valid(xt):</span>
+<span class="sr">            if xt[0]&lt;12 and xt[1]&lt;60:</span>
+<span class="sr">                return True</span>
+<span class="sr">            return False</span>
+
+<span class="sr">        def fmt_time(t):</span>
+<span class="sr">            return &quot;%d:%02d&quot; % (t[0], t[1])</span>
+
+<span class="sr">        pses = itertools.combinations(range(10), num)</span>
+<span class="sr">        ret = []</span>
+<span class="sr">        for ps in pses:</span>
+<span class="sr">            xt = get_xtime(ps)</span>
+<span class="sr">            fg = is_valid(xt)</span>
+<span class="sr">            if fg:</span>
+<span class="sr">                ret.append(fmt_time(xt))</span>
+
+<span class="sr">        return ret</span>
+</pre></div>
+
+
+<p>Fancy that <code>itertools</code> module is already imported!</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
