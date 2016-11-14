@@ -23,7 +23,68 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/leetcode-401-binary-watch.html">LeetCode: 401. Binary Watch</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/150-years-of-sun-yat-sen.html">150 Years of Sun Yat-sen</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-11-12T00:00:00+08:00">
+                Published: 2016-11-12
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/whatever.html">whatever</a>.</p>
+
+</footer><!-- /.post-info --><h1>孙中山先生诞辰 150 周年</h1>
+<p>实际上我对于孙先生的生平并不十分了解，很多所知都是来自于影视剧中的片段。
+不过，总还是有些感慨：150年了呢，孙先生所在的那个时代，不在其中难以想象其动荡，
+但总是会感觉，即便身在现在，自己有看到现在的时代潮流和未来走向吗？
+自觉不能。所以，十分佩服，在时代中看准方向，坚持，妥协，不屈，探索，走完自己不悔的一生。</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/leetcode-421-maximum-xor-of-two-numbers-in-an-array.html" rel="bookmark"
+                           title="Permalink to LeetCode: 421. Maximum XOR of Two Numbers in an Array">LeetCode: 421. Maximum XOR of Two Numbers in an Array</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-28T00:00:00+08:00">
+                Published: 2016-10-28
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
+
+</footer><!-- /.post-info -->                <p>The problem is https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/. 
+If just follow the process defined as described in problem,
+it is quite simple except the runtime is O(n**2):</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
+    <span class="n">def</span> <span class="n">findMaximumXOR</span>(<span class="k">self</span>, <span class="n">nums</span>):
+        <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        :type nums: List[int]</span>
+<span class="s">        :rtype: int</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">len</span>(<span class="n">nums</span>)&lt;<span class="mi">2</span>:
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">ret</span> = <span class="n">nums ...</span></pre></div>
+                <a class="readmore" href="/posts/2016/leetcode-421-maximum-xor-of-two-numbers-in-an-array.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/leetcode-401-binary-watch.html" rel="bookmark"
+                           title="Permalink to LeetCode: 401. Binary Watch">LeetCode: 401. Binary Watch</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-10-27T00:00:00+08:00">
                 Published: 2016-10-27
@@ -34,7 +95,7 @@
         </address>
 <p>In <a href="/category/online-judge.html">Online-Judge</a>.</p>
 
-</footer><!-- /.post-info --><p>The problem is https://leetcode.com/problems/binary-watch/.
+</footer><!-- /.post-info -->                <p>The problem is https://leetcode.com/problems/binary-watch/.
 Because the input size is limited, generating every output is workable.
 Simplely follow the input, using <code>itertools</code> could generate all combinations.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
@@ -44,96 +105,10 @@ Simplely follow the input, using <code>itertools</code> could generate all combi
 <span class="k">def</span> <span class="nf">get_xtime</span><span class="p">(</span><span class="n">ps</span><span class="p">):</span>
     <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">p</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">:</span> <span class="n">h</span> <span class="o">+=</span> <span class="n">digitals</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">m</span> <span class="o">+=</span> <span class="n">digitals</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="n">xt</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">12</span> <span class="ow">and</span> <span class="n">xt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">60</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
-
-<span class="k">def</span> <span class="nf">fmt_time</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
-<span class="c1"># generate all</span>
-<span class="n">all_outputs</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
-    <span class="n">pses</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">ps</span> <span class="ow">in</span> <span class="n">pses</span><span class="p">:</span>
-        <span class="n">xt</span> <span class="o">=</span> <span class="n">get_xtime</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
-        <span class="n">fg</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">xt</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">fg</span><span class="p">:</span>
-            <span class="n">all_outputs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_outputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="p">[])</span>
-            <span class="n">all_outputs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fmt_time</span><span class="p">(</span><span class="n">xt</span><span class="p">))</span>
-
-<span class="k">print</span> <span class="n">all_outputs</span>
-</pre></div>
-
-
-<p>Then, the solution is simple:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
-    <span class="n">all_outputs</span> = {<span class="mi">0</span>:[<span class="s">&#39;0:00&#39;</span>], ...}  <span class="c c-Singleline"># A dict object</span>
-
-    <span class="n">def</span> <span class="n">readBinaryWatch</span>(<span class="k">self</span>, <span class="nb">num</span>):
-        <span class="s">&quot;&quot;&quot;</span>
-<span class="s">        :type num: int</span>
-<span class="s">        :rtype: List[str]</span>
-<span class="s">        &quot;&quot;&quot;</span>
-        <span class="n">try:</span>
-            <span class="k">return</span> <span class="k">self</span>.<span class="n">all_outputs</span>[<span class="nb">num</span>]
-        <span class="n">except:</span>
-            <span class="k">return</span> []
-</pre></div>
-
-
-<p>The performance of above program is in the middle.
-Also, using the origin program as follows is fine:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Solution</span>(<span class="n">object</span>):
-    <span class="n">def</span> <span class="n">readBinaryWatch</span>(<span class="k">self</span>, <span class="nb">num</span>):
-        <span class="s">&quot;&quot;&quot;</span>
-<span class="s">        :type num: int</span>
-<span class="s">        :rtype: List[str]</span>
-<span class="s">        &quot;&quot;&quot;</span>
-        <span class="n">digitals</span> = [<span class="mi">8</span>, <span class="mi">4</span>, <span class="mi">2</span>, <span class="mi">1</span>, <span class="mi">32</span>, <span class="mi">16</span>, <span class="mi">8</span>, <span class="mi">4</span>, <span class="mi">2</span>, <span class="mi">1</span>]
-
-        <span class="n">def</span> <span class="n">get_xtime</span>(<span class="n">ps</span>):
-            <span class="n">h</span> = <span class="mi">0</span>
-            <span class="sr">m = 0</span>
-<span class="sr">            for p in ps:</span>
-<span class="sr">                if p&lt;4: h +=</span> <span class="n">digitals</span>[<span class="n">p</span>]
-                <span class="n">else:</span> <span class="sr">m += digitals[p]</span>
-<span class="sr">            return (h, m)</span>
-
-<span class="sr">        def is_valid(xt):</span>
-<span class="sr">            if xt[0]&lt;12 and xt[1]&lt;60:</span>
-<span class="sr">                return True</span>
-<span class="sr">            return False</span>
-
-<span class="sr">        def fmt_time(t):</span>
-<span class="sr">            return &quot;%d:%02d&quot; % (t[0], t[1])</span>
-
-<span class="sr">        pses = itertools.combinations(range(10), num)</span>
-<span class="sr">        ret = []</span>
-<span class="sr">        for ps in pses:</span>
-<span class="sr">            xt = get_xtime(ps)</span>
-<span class="sr">            fg = is_valid(xt)</span>
-<span class="sr">            if fg:</span>
-<span class="sr">                ret.append(fmt_time(xt))</span>
-
-<span class="sr">        return ret</span>
-</pre></div>
-
-
-<p>Fancy that <code>itertools</code> module is already imported!</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+    <span class="k">for ...</span></pre></div>
+                <a class="readmore" href="/posts/2016/leetcode-401-binary-watch.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -262,7 +237,11 @@ it just did exactly as this problem described.</p>
         </address>
 <p>In <a href="/category/whatever.html">whatever</a>.</p>
 
-</footer><!-- /.post-info -->                <p>March 2017! Begin to save money~</p>
+</footer><!-- /.post-info -->                <p>March 2017! Begin to save money~
+The price maybe $299.99, I can save $60 each month!
+Till the end of March 2017, I will get $300!</p>
+<p>But, I have a problem...Can I buy one in origin price here?
+It may not on sale in China...maybe taobao is ...</p>
                 <a class="readmore" href="/posts/2016/nintendo-switch-was-announced.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -318,63 +297,9 @@ After copying to new matrix, copy ...</p>
                 <a class="readmore" href="/posts/2016/leetcode-48-rotate-image.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2016/setup-a-proxy-for-mysql-server-on-ubuntu-located-in-intranet.html" rel="bookmark"
-                           title="Permalink to Setup a proxy for MySQL server on Ubuntu located in intranet">Setup a proxy for MySQL server on Ubuntu located in intranet</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-10-14T00:00:00+08:00">
-                Published: 2016-10-14
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/development.html">development</a>.</p>
-
-</footer><!-- /.post-info -->                <p>I have a MySQL server instance running in office's intranet,
-which only can not be accessed from internet.
-Meanwhile, I have a proxy server as a gateway connected to both networks,
-and I therefore I could setup an MySQL proxy!</p>
-<p>Fortunately, after searing on web, 
-a program called <code>mysql-proxy ...</code></p>
-                <a class="readmore" href="/posts/2016/setup-a-proxy-for-mysql-server-on-ubuntu-located-in-intranet.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2016/update-the-firmware-of-my-samsung-sc-05g-to-android-601-marshmallow.html" rel="bookmark"
-                           title="Permalink to Update the firmware of my Samsung SC-05G to Android 6.0.1 Marshmallow">Update the firmware of my Samsung SC-05G to Android 6.0.1 Marshmallow</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-10-13T00:00:00+08:00">
-                Published: 2016-10-13
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/whatever.html">whatever</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Update my Samsung S6 SC-05G to Android 6.0.1 Marshmallow!
-It's quite simple, just following this post: <a href="http://www.androidinfotech.com/2016/10/samsung-galaxy-s6-sc-05g-marshmallow-firmware.html">Samsung Galaxy S6 SC-05G 6.0.1 Marshmallow Firmware</a>.</p>
-<p>The steps as follows:</p>
-<ol>
-<li>
-<p>Download Samsung USB Driver to PC. The original post provided this link: https://bitbucket.org/Serverbee/downloadbee/downloads ...</p></li></ol>
-                <a class="readmore" href="/posts/2016/update-the-firmware-of-my-samsung-sc-05g-to-android-601-marshmallow.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 3
+    Page 1 / 4
         <a href="/author/focus2.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->
