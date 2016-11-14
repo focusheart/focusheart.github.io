@@ -23,7 +23,83 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2016/setup-a-proxy-for-mysql-server-on-ubuntu-located-in-intranet.html">Setup a proxy for MySQL server on Ubuntu located in intranet</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2016/mutt-is-a-good-email-command.html">mutt is a good email command!</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-11-14T00:00:00+08:00">
+                Published: 2016-11-14
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info --><h1>Mutt!</h1>
+<p>I have some thing stored on my office computer,
+but it is not simple to access from outside.
+The only way is using jump machine by <code>ssh</code>.
+If I want to get some files out, 
+I must send it to jump machine and then fetch it.</p>
+<p>If the file is large, I can bear the inconvenience.
+But if files are small and must be send a lot of times,
+it really made me mad!</p>
+<p>So, using a email client for sending small files as attachment is a good idea!
+After searching, I found <code>mutt</code> is very good!</p>
+<p>Simplly install:</p>
+<div class="highlight"><pre><span></span>$ sudo apt install mutt msmtp
+</pre></div>
+
+
+<p>Simplly config:</p>
+<div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">sudo</span> <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">Muttrc</span>
+
+<span class="cp"># add the following at the end of file</span>
+<span class="n">set</span> <span class="n">sendmail</span><span class="o">=</span><span class="s">&quot;/usr/bin/msmtp&quot;</span>
+<span class="n">set</span> <span class="n">use_from</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">set</span> <span class="n">realname</span><span class="o">=</span><span class="s">&quot;My Name&quot;</span>
+<span class="n">set</span> <span class="n">from</span><span class="o">=</span><span class="n">xxx</span><span class="mf">@163.</span><span class="n">com</span>
+<span class="n">set</span> <span class="n">envelope_from</span><span class="o">=</span><span class="n">yes</span>
+
+<span class="err">$</span> <span class="n">vim</span> <span class="o">~/</span><span class="p">.</span><span class="n">msmtprc</span>
+
+<span class="cp"># add the following</span>
+<span class="n">account</span> <span class="k">default</span>
+<span class="n">host</span> <span class="n">smtp</span><span class="mf">.163</span><span class="p">.</span><span class="n">com</span>
+<span class="n">from</span> <span class="n">focusheart</span><span class="mf">@163.</span><span class="n">com</span>
+<span class="n">auth</span> <span class="n">plain</span>
+<span class="n">user</span> <span class="n">focusheart</span>
+<span class="n">password</span> <span class="mi">1234</span><span class="n">eszaq1</span>
+<span class="n">logfile</span> <span class="o">~/</span><span class="p">.</span><span class="n">msmtp</span><span class="p">.</span><span class="n">log</span>
+
+<span class="err">$</span> <span class="n">chmod</span> <span class="mi">600</span> <span class="p">.</span><span class="o">/</span><span class="n">msmtprc</span>
+<span class="err">$</span> <span class="n">touch</span> <span class="p">.</span><span class="n">msmtp</span><span class="p">.</span><span class="n">log</span>
+</pre></div>
+
+
+<p>Then, send simple mail to <code>xxxx@qq.com</code>:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;Mail Content!&quot;</span> <span class="p">|</span> mutt -s <span class="s2">&quot;Mail Title!&quot;</span> xxxx@qq.com
+</pre></div>
+
+
+<p>Or, send mail with an attchment to <code>xxxx@qq.com</code> and cc to <code>yyy@qq.com</code></p>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;Attach Mail&quot;</span> <span class="p">|</span> mutt -s <span class="s2">&quot;Mail Title! Attached!&quot;</span> -a path-to-file -- xxxx@qq.com -c yyy@qq.com
+</pre></div>
+
+
+<p>Life become better now!</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2016/setup-a-proxy-for-mysql-server-on-ubuntu-located-in-intranet.html" rel="bookmark"
+                           title="Permalink to Setup a proxy for MySQL server on Ubuntu located in intranet">Setup a proxy for MySQL server on Ubuntu located in intranet</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-10-14T00:00:00+08:00">
                 Published: 2016-10-14
@@ -34,57 +110,15 @@
         </address>
 <p>In <a href="/category/development.html">development</a>.</p>
 
-</footer><!-- /.post-info --><p>I have a MySQL server instance running in office's intranet,
+</footer><!-- /.post-info -->                <p>I have a MySQL server instance running in office's intranet,
 which only can not be accessed from internet.
 Meanwhile, I have a proxy server as a gateway connected to both networks,
 and I therefore I could setup an MySQL proxy!</p>
 <p>Fortunately, after searing on web, 
-a program called <code>mysql-proxy</code> could solve my problem!
-Also, it is included in Ubuntu's APT source.</p>
-<p>Installation as the following steps:</p>
-<div class="highlight"><pre><span></span># install the program
-$ sudo apt-get install mysql-proxy
-
-# write a proxy config file
-$ vim config.conf
-
-# the content is my situation
-[mysql-proxy]  
-daemon = 1
-pid-file = /var/run/mysql-proxy.pid
-log-file = /var/log/mysql-proxy.log
-log-level = debug
-max-open-files = 4096
-plugins = admin,proxy
-user = root
-
-proxy-address = proxy-server-IP:4567
-
-proxy-backend-addresses = mysql-server-IP:3306
-admin-username = admin
-admin-password = admin
-admin-lua-script = /usr/lib/mysql-proxy/lua/admin.lua
-
-# run the proxy
-$ sudo mysql-proxy --defaults-file=config.conf
-</pre></div>
-
-
-<p>Then you may have a proxy running, listening port 4567.
-If it doesn't work, check the logfile in <code>/var/log/mysql-proxy.log</code>.</p>
-<p>When proxy server is ready, 
-create an user which is accessible to MySQL server from proxy server.</p>
-<div class="highlight"><pre><span></span># on MySQL server, execute following command to add a user:
-mysql&gt; grant all on dbname.* to username@proxy-server-IP identified by &#39;pw&#39;;
-</pre></div>
-
-
-<p>Finally, you can have access MySQL server from internet by a proxy!</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+a program called <code>mysql-proxy ...</code></p>
+                <a class="readmore" href="/posts/2016/setup-a-proxy-for-mysql-server-on-ubuntu-located-in-intranet.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -316,28 +350,6 @@ The speed in late night is quite good, but I can't install softwares at that tim
 </footer><!-- /.post-info -->                <p>Finally, the VNCServer works for me on my Ubuntu 14.04.
 As I experienced before in Ubuntu 12.04 and other dists, the VNCServer is a good choice to control computer remotely. However, it's changed since I installed Ubuntu 14.04. I can NOT get the "Desktop" when I ...</p>
                 <a class="readmore" href="/posts/2016/vncserver-finally-works-on-my-ubuntu-1404.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2016/ffmpeg-is-amazing-a-simple-tip-for-html5-use-case.html" rel="bookmark"
-                           title="Permalink to FFmpeg is amazing! A simple tip for HTML5 use case">FFmpeg is amazing! A simple tip for HTML5 use case</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-02-29T21:40:00+08:00">
-                Published: 2016-02-29
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/focus.html">Focus</a>
-        </address>
-<p>In <a href="/category/development.html">development</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Video/Audio processing is not easy as far as I know, and the FFmpeg is like the Swiss Knife in my thought. In this case, I've some FLV files stored in Hadoop. I want to make it playable on web page without Flash plugins. The solution is quite simple ...</p>
-                <a class="readmore" href="/posts/2016/ffmpeg-is-amazing-a-simple-tip-for-html5-use-case.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->

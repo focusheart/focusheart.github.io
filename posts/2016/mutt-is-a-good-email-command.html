@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>mutt is a good email command!</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Sit down, write down, light up </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about-me.html">About Me</a></li>
+                    <li class="active"><a href="/category/development.html">development</a></li>
+                    <li><a href="/category/online-judge.html">Online-Judge</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2016/mutt-is-a-good-email-command.html" rel="bookmark"
+           title="Permalink to mutt is a good email command!">mutt is a good email command!</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-11-14T00:00:00+08:00">
+                Published: 2016-11-14
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">development</a>.</p>
+
+</footer><!-- /.post-info -->      <h1>Mutt!</h1>
+<p>I have some thing stored on my office computer,
+but it is not simple to access from outside.
+The only way is using jump machine by <code>ssh</code>.
+If I want to get some files out, 
+I must send it to jump machine and then fetch it.</p>
+<p>If the file is large, I can bear the inconvenience.
+But if files are small and must be send a lot of times,
+it really made me mad!</p>
+<p>So, using a email client for sending small files as attachment is a good idea!
+After searching, I found <code>mutt</code> is very good!</p>
+<p>Simplly install:</p>
+<div class="highlight"><pre><span></span>$ sudo apt install mutt msmtp
+</pre></div>
+
+
+<p>Simplly config:</p>
+<div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">sudo</span> <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">Muttrc</span>
+
+<span class="cp"># add the following at the end of file</span>
+<span class="n">set</span> <span class="n">sendmail</span><span class="o">=</span><span class="s">&quot;/usr/bin/msmtp&quot;</span>
+<span class="n">set</span> <span class="n">use_from</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">set</span> <span class="n">realname</span><span class="o">=</span><span class="s">&quot;My Name&quot;</span>
+<span class="n">set</span> <span class="n">from</span><span class="o">=</span><span class="n">xxx</span><span class="mf">@163.</span><span class="n">com</span>
+<span class="n">set</span> <span class="n">envelope_from</span><span class="o">=</span><span class="n">yes</span>
+
+<span class="err">$</span> <span class="n">vim</span> <span class="o">~/</span><span class="p">.</span><span class="n">msmtprc</span>
+
+<span class="cp"># add the following</span>
+<span class="n">account</span> <span class="k">default</span>
+<span class="n">host</span> <span class="n">smtp</span><span class="mf">.163</span><span class="p">.</span><span class="n">com</span>
+<span class="n">from</span> <span class="n">focusheart</span><span class="mf">@163.</span><span class="n">com</span>
+<span class="n">auth</span> <span class="n">plain</span>
+<span class="n">user</span> <span class="n">focusheart</span>
+<span class="n">password</span> <span class="mi">1234</span><span class="n">eszaq1</span>
+<span class="n">logfile</span> <span class="o">~/</span><span class="p">.</span><span class="n">msmtp</span><span class="p">.</span><span class="n">log</span>
+
+<span class="err">$</span> <span class="n">chmod</span> <span class="mi">600</span> <span class="p">.</span><span class="o">/</span><span class="n">msmtprc</span>
+<span class="err">$</span> <span class="n">touch</span> <span class="p">.</span><span class="n">msmtp</span><span class="p">.</span><span class="n">log</span>
+</pre></div>
+
+
+<p>Then, send simple mail to <code>xxxx@qq.com</code>:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;Mail Content!&quot;</span> <span class="p">|</span> mutt -s <span class="s2">&quot;Mail Title!&quot;</span> xxxx@qq.com
+</pre></div>
+
+
+<p>Or, send mail with an attchment to <code>xxxx@qq.com</code> and cc to <code>yyy@qq.com</code></p>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;Attach Mail&quot;</span> <span class="p">|</span> mutt -s <span class="s2">&quot;Mail Title! Attached!&quot;</span> -a path-to-file -- xxxx@qq.com -c yyy@qq.com
+</pre></div>
+
+
+<p>Life become better now!</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
