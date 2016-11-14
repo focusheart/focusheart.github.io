@@ -37,10 +37,10 @@ Simplly config:
     # add the following
     account default
     host smtp.163.com
-    from focusheart@163.com
+    from xxx@163.com
     auth plain
-    user focusheart
-    password 1234eszaq1
+    user xxx
+    password 123456
     logfile ~/.msmtp.log
     
     $ chmod 600 ./msmtprc
