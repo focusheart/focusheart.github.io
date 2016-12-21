@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Amazing SSH Tunnel!</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Sit down, write down, light up </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about-me.html">About Me</a></li>
+                    <li class="active"><a href="/category/development.html">Development</a></li>
+                    <li><a href="/category/online-judge.html">Online-Judge</a></li>
+                    <li><a href="/category/whatever.html">whatever</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2016/amazing-ssh-tunnel.html" rel="bookmark"
+           title="Permalink to Amazing SSH Tunnel!">Amazing SSH Tunnel!</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-12-21T00:00:00+08:00">
+                Published: 2016-12-21
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/focus.html">Focus</a>
+        </address>
+<p>In <a href="/category/development.html">Development</a>.</p>
+
+</footer><!-- /.post-info -->      <p>I have been using ssh to connect to my servers for a long time.
+A typical scene is ssh to a gateway machine and then ssh to another machine in ethernet.
+Then, vim this, vim that, scp this, scp that, etc.
+I have been used to this sort of thing, although it was really boring.
+Can I make it easier? The answer is yes! I found a powerful tool! <strong>SSH Tunnel</strong>!</p>
+<p>On Windows OS, putty can provide all needed tools: (download here)[http://www.putty.org/]</p>
+<p>Let's begin with the following scene:</p>
+<div class="highlight"><pre><span></span>+---------------+                 +-------------------+
+|  my_notebook  |     internet    |  Gateway_Server   |
+|  on internet  | ===============&gt;|  pub:202.117.0.1  |
++---------------+                 |  eth:192.168.1.2  |
+                                  +-------------------+
+                                           ||
+                                           ||  ethernet
+                                      +----||----+
+                                      | ethernet |
+                                      |  Switch  |
+                                      +--||--||--+
+                                         ||  ||  ethernet
+                              ++=========++  ++=========++
+                              ||                        ||
+                      +------------------+     +-------------------+
+                      |  Inner_Server_A  |     |   Inner_Server_B  |
+                      |  192.168.1.123   |     |   192.168.1.166   |
+                      +------------------+     +-------------------+
+</pre></div>
+
+
+<p>In order to do jobs on <code>Inner_Server_A</code>, I must do this on <code>my_notebook</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">open</span> <span class="n">Xshell</span> <span class="p">(</span><span class="n">A</span> <span class="n">ssh</span> <span class="n">client</span> <span class="n">on</span> <span class="n">Windows</span> <span class="n">OS</span><span class="p">)</span>
+<span class="n">ssh</span> <span class="n">user</span><span class="mf">@202.117.0.1</span>
+<span class="cp"># logined to **Gateway_Server**</span>
+<span class="n">ssh</span> <span class="n">user</span><span class="mf">@192.168.1.123</span>
+</pre></div>
+
+
+<p>If I want to copy some files out of <code>Inner_Server_A</code>,
+I have to take <code>Gateway_Server</code> as a trasit port.
+<code>scp</code> files to <code>Gateway_Server</code>, then <code>scp</code> files to <code>my_notebook</code>.
+It's fine if just doing this for a few times, when you have to do this often,
+it's boring and I hate this!</p>
+<p>Now, I have <code>SSH Tunnel</code>! It's quite simple!
+First, prepare follwoing software if on Windows (I have tested on Win 10):</p>
+<div class="highlight"><pre><span></span>(DokanInstall_0.6.0.exe)[https://docs.google.com/file/d/0B4VuXMcT-V28elkzejN0aDNPRFk/view]
+(win-sshfs-0.0.1.5-setup.exe)[https://github.com/apaka/win-sshfs] or (Google Code Archive)[https://code.google.com/p/win-sshfs/]
+(plink.exe)[http://www.putty.org/]
+</pre></div>
+
+
+<p>First, create a tunnel to <code>Inner_Server_A</code> on <code>my_notebook</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">plink</span><span class="p">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">N</span> <span class="o">-</span><span class="n">L</span> <span class="mf">127.0.0.1</span><span class="o">:</span><span class="mi">22123</span><span class="o">:</span><span class="mf">192.168.1.123</span><span class="o">:</span><span class="mi">22</span> <span class="n">user</span><span class="mf">@202.117.0.1</span>
+</pre></div>
+
+
+<p>Then, <code>plink</code> will create a tunnel between <code>my_notebook:22123</code> and <code>Inner_Server_A:22</code>.
+on <code>my_notebook</code>, use Xshell or putty connect to <code>localhost:22123</code>, you will find yourself on <code>Inner_Server_A</code>!</p>
+<p>Next, in order to copy files easier(Xshell provides <code>xftp</code> which is fine),
+we want to setup <code>SSHFS</code> between our <code>my_notebook</code> and <code>Inner_Server_A</code>.</p>
+<p>If <code>my_notebook</code> runs a Linux distro, it is very easy to setup <code>SSHFS</code>.
+For example, on Ubunutu, once you have installed the <code>sshfs</code>, simply run:</p>
+<div class="highlight"><pre><span></span>$ sshfs -o allow_other,transform_symlinks user@remote_ip:/path /localpath
+</pre></div>
+
+
+<p>Then, you get remote path mounted on your <code>/localpath</code>.</p>
+<p>If <code>my_notebook</code> runs a Windows OS, it is not as easy as on Linux.
+You should install <code>Dokan</code> and <code>win-sshfs</code>, then follow the GUI.
+<code>win-sshfs</code> will guide you mount a remote machine to your local drive(E/F/G/H/.../X/Y/Z).</p>
+<p>Have a try!</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
