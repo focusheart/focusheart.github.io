@@ -47,9 +47,9 @@ it's boring and I hate this!
 Now, I have `SSH Tunnel`! It's quite simple!
 First, prepare follwoing software if on Windows (I have tested on Win 10):
 
-    (DokanInstall_0.6.0.exe)[https://docs.google.com/file/d/0B4VuXMcT-V28elkzejN0aDNPRFk/view]
-    (win-sshfs-0.0.1.5-setup.exe)[https://github.com/apaka/win-sshfs] or (Google Code Archive)[https://code.google.com/p/win-sshfs/]
-    (plink.exe)[http://www.putty.org/]
+* (DokanInstall_0.6.0.exe)[https://docs.google.com/file/d/0B4VuXMcT-V28elkzejN0aDNPRFk/view]
+* (win-sshfs-0.0.1.5-setup.exe)[https://github.com/apaka/win-sshfs] or (Google Code Archive)[https://code.google.com/p/win-sshfs/]
+* (plink.exe)[http://www.putty.org/]
 
 First, create a tunnel to `Inner_Server_A` on `my_notebook`:
 

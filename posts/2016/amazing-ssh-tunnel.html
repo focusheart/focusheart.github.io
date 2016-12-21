@@ -82,12 +82,11 @@ It's fine if just doing this for a few times, when you have to do this often,
 it's boring and I hate this!</p>
 <p>Now, I have <code>SSH Tunnel</code>! It's quite simple!
 First, prepare follwoing software if on Windows (I have tested on Win 10):</p>
-<div class="highlight"><pre><span></span>(DokanInstall_0.6.0.exe)[https://docs.google.com/file/d/0B4VuXMcT-V28elkzejN0aDNPRFk/view]
-(win-sshfs-0.0.1.5-setup.exe)[https://github.com/apaka/win-sshfs] or (Google Code Archive)[https://code.google.com/p/win-sshfs/]
-(plink.exe)[http://www.putty.org/]
-</pre></div>
-
-
+<ul>
+<li>(DokanInstall_0.6.0.exe)[https://docs.google.com/file/d/0B4VuXMcT-V28elkzejN0aDNPRFk/view]</li>
+<li>(win-sshfs-0.0.1.5-setup.exe)[https://github.com/apaka/win-sshfs] or (Google Code Archive)[https://code.google.com/p/win-sshfs/]</li>
+<li>(plink.exe)[http://www.putty.org/]</li>
+</ul>
 <p>First, create a tunnel to <code>Inner_Server_A</code> on <code>my_notebook</code>:</p>
 <div class="highlight"><pre><span></span><span class="n">plink</span><span class="p">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">N</span> <span class="o">-</span><span class="n">L</span> <span class="mf">127.0.0.1</span><span class="o">:</span><span class="mi">22123</span><span class="o">:</span><span class="mf">192.168.1.123</span><span class="o">:</span><span class="mi">22</span> <span class="n">user</span><span class="mf">@202.117.0.1</span>
 </pre></div>
